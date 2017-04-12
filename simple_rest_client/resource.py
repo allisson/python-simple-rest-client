@@ -12,13 +12,13 @@ logger = logging.getLogger(__name__)
 
 class BaseResource:
     def __init__(self, api_root_url=None, resource_name=None, action_urls={},
-                 headers={}, timeout=3, append_slash=False,
+                 headers={}, timeout=None, append_slash=False,
                  json_encode_body=False):
         self.api_root_url = api_root_url
         self.resource_name = resource_name
         self.headers = headers
         self.action_urls = action_urls or self.get_default_action_urls()
-        self.timeout = timeout
+        self.timeout = timeout or 3
         self.append_slash = append_slash
         self.json_encode_body = json_encode_body
 

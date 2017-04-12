@@ -1,7 +1,9 @@
 from functools import wraps
 import logging
 
-from requests.exceptions import Timeout, ReadTimeout, ConnectionError as RequestsConnectionError
+from requests.exceptions import (
+    Timeout, ReadTimeout, ConnectionError as RequestsConnectionError
+)
 import status
 
 from simple_rest_client.exceptions import ClientError, ServerError
