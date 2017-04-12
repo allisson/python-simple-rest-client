@@ -1,0 +1,31 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.13.0]
+    method: GET
+    uri: https://reqres.in/api/users
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA6yO0WrDMAxF/+U+m5gkexj+lTGK6qiOixMZS2lhpf8+aAaF7rUv4krics4NlRIj
+        9A6V22FfRgcTo4LQD3/x8VGED4eJjBC+bsjTo3fKTe2w0sIISCwtMRwKPY/HstkMB7qQUUPAbFY1
+        eK9jRwv9yEpX7aIsfssniqx+n3bNZtx8pMJHSROvvh8+u3NNuLudP7zwyxZzKe8WOItyndU4/zcY
+        XwxEI7U386VwqpJkIr48Bb7vvwAAAP//AwDhQpdTvgEAAA==
+    headers:
+      Access-Control-Allow-Origin: ['*']
+      CF-RAY: [34e6215e2d274b7b-GRU]
+      Connection: [keep-alive]
+      Content-Encoding: [gzip]
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Wed, 12 Apr 2017 12:18:49 GMT']
+      ETag: [W/"1be-q96WkDv6JqfLvIPiRhzWJQ"]
+      Server: [cloudflare-nginx]
+      Set-Cookie: ['__cfduid=d7d6cafcf7eb1601c80ce095837a2af041491999528; expires=Thu,
+          12-Apr-18 12:18:48 GMT; path=/; domain=.reqres.in; HttpOnly']
+      X-Powered-By: [Express]
+    status: {code: 200, message: OK}
+version: 1

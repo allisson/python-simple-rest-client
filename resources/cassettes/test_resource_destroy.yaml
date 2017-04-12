@@ -1,0 +1,25 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['0']
+      User-Agent: [python-requests/2.13.0]
+    method: DELETE
+    uri: https://reqres.in/api/users/2
+  response:
+    body: {string: ''}
+    headers:
+      Access-Control-Allow-Origin: ['*']
+      CF-RAY: [34e627256d104ae5-GRU]
+      Connection: [keep-alive]
+      Date: ['Wed, 12 Apr 2017 12:22:45 GMT']
+      ETag: [W/"2-mZFLkyvTelC5g8XnyQrpOw"]
+      Server: [cloudflare-nginx]
+      Set-Cookie: ['__cfduid=da26e0b3adc2c243462e9e8badf4d44ef1491999765; expires=Thu,
+          12-Apr-18 12:22:45 GMT; path=/; domain=.reqres.in; HttpOnly']
+      X-Powered-By: [Express]
+    status: {code: 204, message: No Content}
+version: 1

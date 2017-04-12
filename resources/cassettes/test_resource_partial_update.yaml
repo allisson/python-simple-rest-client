@@ -1,0 +1,27 @@
+interactions:
+- request:
+    body: '{"name": "morpheus", "job": "zion resident"}'
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['44']
+      User-Agent: [python-requests/2.13.0]
+    method: PATCH
+    uri: https://reqres.in/api/users/2
+  response:
+    body: {string: '{"updatedAt":"2017-04-12T12:21:03.404Z"}'}
+    headers:
+      Access-Control-Allow-Origin: ['*']
+      CF-RAY: [34e624a90c274c18-GRU]
+      Connection: [keep-alive]
+      Content-Length: ['40']
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Wed, 12 Apr 2017 12:21:03 GMT']
+      ETag: [W/"28-QL+n7BmeacmFOjA/iJy17A"]
+      Server: [cloudflare-nginx]
+      Set-Cookie: ['__cfduid=d8bbaea0f0a87a3b29dd24c94a1734ceb1491999663; expires=Thu,
+          12-Apr-18 12:21:03 GMT; path=/; domain=.reqres.in; HttpOnly']
+      X-Powered-By: [Express]
+    status: {code: 200, message: OK}
+version: 1

@@ -1,0 +1,27 @@
+interactions:
+- request:
+    body: '{"name": "morpheus", "job": "leader"}'
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['37']
+      User-Agent: [python-requests/2.13.0]
+    method: POST
+    uri: https://reqres.in/api/users
+  response:
+    body: {string: '{"id":"359","createdAt":"2017-04-12T12:18:49.439Z"}'}
+    headers:
+      Access-Control-Allow-Origin: ['*']
+      CF-RAY: [34e62163db9f4a72-GRU]
+      Connection: [keep-alive]
+      Content-Length: ['51']
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Wed, 12 Apr 2017 12:18:49 GMT']
+      ETag: [W/"33-ByYwd/DtMGUxZ1gq90ZuEw"]
+      Server: [cloudflare-nginx]
+      Set-Cookie: ['__cfduid=d6fa09b541c3ddf8d8275a159f515c9151491999529; expires=Thu,
+          12-Apr-18 12:18:49 GMT; path=/; domain=.reqres.in; HttpOnly']
+      X-Powered-By: [Express]
+    status: {code: 201, message: Created}
+version: 1
