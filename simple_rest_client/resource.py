@@ -48,6 +48,7 @@ class Resource(BaseResource):
 
     @handle_request_error
     def make_request(self, request):
+        logger.debug('operation=request_started, request={!r}'.format(request))
         method = getattr(self.session, request.method.lower())
         client_response = method(
             request.url,
@@ -61,13 +62,19 @@ class Resource(BaseResource):
         if 'application/json' in content_type:
             body = json.loads(body)
 
-        return Response(
+        response = Response(
             url=client_response.url,
             method=client_response.request.method,
             body=body,
             headers=client_response.headers,
             status_code=client_response.status_code
         )
+        logger.debug(
+            'operation=request_finished, request={!r}, response={!r}'.format(
+                request, response
+            )
+        )
+        return response
 
     def list(self, *args, **kwargs):
         url = self.get_full_url('list', *args)
