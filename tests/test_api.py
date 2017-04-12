@@ -20,7 +20,9 @@ def test_api_add_resource(api, reqres_resource):
 def test_api_get_resource_list(api):
     api.add_resource(resource_name='users')
     api.add_resource(resource_name='login')
-    assert api.get_resource_list() == ['users', 'login']
+    resource_list = api.get_resource_list()
+    assert 'users' in resource_list
+    assert 'login' in resource_list
 
 
 @vcr.use_cassette()
