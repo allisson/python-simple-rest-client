@@ -58,6 +58,20 @@ def test_base_resource_get_full_url_with_invalid_action(base_resource):
     assert 'No url match for "listy"' in str(execinfo)
 
 
+def test_base_resource_build_request_instance(base_resource):
+    resource = base_resource(
+        api_root_url='http://example.com', resource_name='users',
+        json_encode_body=True
+    )
+    request = resource.build_request_instance(
+        1, action_name='update', method='PUT', params={}, body={'body': True},
+        headers={}, timeout=3
+    )
+    assert request.url == 'http://example.com/users/1'
+    assert request.method == 'PUT'
+    assert request.body == '{"body": true}'
+
+
 @vcr.use_cassette()
 def test_resource_list(reqres_resource):
     response = reqres_resource.list()

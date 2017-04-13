@@ -45,6 +45,8 @@ class BaseResource:
                                params=None, body=None, headers=None,
                                timeout=None):
         url = self.get_full_url(action_name, *args)
+        if self.json_encode_body and body:
+            body = json.dumps(body)
         return Request(
             url=url, method=method, params=params, body=body, headers=headers,
             timeout=timeout
