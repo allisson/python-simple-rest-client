@@ -90,9 +90,9 @@ class Resource(BaseResource):
         )
         return response
 
-    def list(self, *args, params={}, headers={}):
+    def list(self, *args, body=None, params={}, headers={}):
         request = self.build_request_instance(
-            *args, action_name='list', method='GET', params=params, body=None,
+            *args, action_name='list', method='GET', params=params, body=body,
             headers=headers, timeout=self.timeout
         )
         return self.make_request(request)
@@ -104,10 +104,10 @@ class Resource(BaseResource):
         )
         return self.make_request(request)
 
-    def retrieve(self, *args, params={}, headers={}):
+    def retrieve(self, *args, body=None, params={}, headers={}):
         request = self.build_request_instance(
             *args, action_name='retrieve', method='GET', params=params,
-            body=None, headers=headers, timeout=self.timeout
+            body=body, headers=headers, timeout=self.timeout
         )
         return self.make_request(request)
 
@@ -125,9 +125,9 @@ class Resource(BaseResource):
         )
         return self.make_request(request)
 
-    def destroy(self, *args, params={}, headers={}):
+    def destroy(self, *args, body=None, params={}, headers={}):
         request = self.build_request_instance(
             *args, action_name='destroy', method='DELETE', params=params,
-            body=None, headers=headers, timeout=self.timeout
+            body=body, headers=headers, timeout=self.timeout
         )
         return self.make_request(request)
