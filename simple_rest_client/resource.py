@@ -41,6 +41,15 @@ class BaseResource:
             url += '/'
         return urljoin(self.api_root_url, url)
 
+    def build_request_instance(self, *args, action_name=None, method=None,
+                               params=None, body=None, headers=None,
+                               timeout=None):
+        url = self.get_full_url(action_name, *args)
+        return Request(
+            url=url, method=method, params=params, body=body, headers=headers,
+            timeout=timeout
+        )
+
 
 class Resource(BaseResource):
     def __init__(self, *args, **kwargs):
@@ -80,55 +89,43 @@ class Resource(BaseResource):
         return response
 
     def list(self, *args, params={}, headers={}):
-        url = self.get_full_url('list', *args)
-        request = Request(
-            url=url, method='GET', params=params, body=None, headers=headers,
-            timeout=self.timeout
+        request = self.build_request_instance(
+            *args, action_name='list', method='GET', params=params, body=None,
+            headers=headers, timeout=self.timeout
         )
         return self.make_request(request)
 
     def create(self, *args, body=None, params={}, headers={}):
-        url = self.get_full_url('create', *args)
-        if self.json_encode_body:
-            body = json.dumps(body)
-        request = Request(
-            url=url, method='POST', params=params, body=body, headers=headers,
-            timeout=self.timeout
+        request = self.build_request_instance(
+            *args, action_name='create', method='POST', params=params,
+            body=body, headers=headers, timeout=self.timeout
         )
         return self.make_request(request)
 
     def retrieve(self, *args, params={}, headers={}):
-        url = self.get_full_url('retrieve', *args)
-        request = Request(
-            url=url, method='GET', params=params, body=None, headers=headers,
-            timeout=self.timeout
+        request = self.build_request_instance(
+            *args, action_name='retrieve', method='GET', params=params,
+            body=None, headers=headers, timeout=self.timeout
         )
         return self.make_request(request)
 
     def update(self, *args, body=None, params={}, headers={}):
-        url = self.get_full_url('update', *args)
-        if self.json_encode_body and body:
-            body = json.dumps(body)
-        request = Request(
-            url=url, method='PUT', params=params, body=body, headers=headers,
-            timeout=self.timeout
+        request = self.build_request_instance(
+            *args, action_name='update', method='PUT', params=params,
+            body=body, headers=headers, timeout=self.timeout
         )
         return self.make_request(request)
 
     def partial_update(self, *args, body=None, params={}, headers={}):
-        url = self.get_full_url('partial_update', *args)
-        if self.json_encode_body and body:
-            body = json.dumps(body)
-        request = Request(
-            url=url, method='PATCH', params=params, body=body, headers=headers,
-            timeout=self.timeout
+        request = self.build_request_instance(
+            *args, action_name='partial_update', method='PATCH', params=params,
+            body=body, headers=headers, timeout=self.timeout
         )
         return self.make_request(request)
 
     def destroy(self, *args, params={}, headers={}):
-        url = self.get_full_url('destroy', *args)
-        request = Request(
-            url=url, method='DELETE', params=params, body=None,
-            headers=headers, timeout=self.timeout
+        request = self.build_request_instance(
+            *args, action_name='destroy', method='DELETE', params=params,
+            body=None, headers=headers, timeout=self.timeout
         )
         return self.make_request(request)
