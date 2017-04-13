@@ -39,8 +39,6 @@ def test_reqres_api_users_list(reqres_api):
     assert response.status_code == status.HTTP_200_OK
     assert response.method == 'GET'
     assert response.url == 'https://reqres.in/api/users'
-    assert response.headers
-    assert response.body
 
 
 @vcr.use_cassette()
@@ -50,8 +48,6 @@ def test_reqres_api_users_create(reqres_api):
     assert response.status_code == status.HTTP_201_CREATED
     assert response.method == 'POST'
     assert response.url == 'https://reqres.in/api/users'
-    assert response.headers
-    assert response.body
 
 
 @vcr.use_cassette()
@@ -61,8 +57,6 @@ def test_reqres_api_users_retrieve(reqres_api):
     assert response.status_code == status.HTTP_200_OK
     assert response.method == 'GET'
     assert response.url == 'https://reqres.in/api/users/2'
-    assert response.headers
-    assert response.body
 
 
 @vcr.use_cassette()
@@ -73,8 +67,6 @@ def test_reqres_api_users_update(reqres_api):
     assert response.status_code == status.HTTP_200_OK
     assert response.method == 'PUT'
     assert response.url == 'https://reqres.in/api/users/2'
-    assert response.headers
-    assert response.body
 
 
 @vcr.use_cassette()
@@ -85,8 +77,6 @@ def test_reqres_api_users_partial_update(reqres_api):
     assert response.status_code == status.HTTP_200_OK
     assert response.method == 'PATCH'
     assert response.url == 'https://reqres.in/api/users/2'
-    assert response.headers
-    assert response.body
 
 
 @vcr.use_cassette()
@@ -96,5 +86,3 @@ def test_reqres_api_users_destroy(reqres_api):
     assert response.status_code == status.HTTP_204_NO_CONTENT
     assert response.method == 'DELETE'
     assert response.url == 'https://reqres.in/api/users/2'
-    assert response.headers
-    assert response.body == ''

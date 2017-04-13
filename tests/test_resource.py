@@ -64,8 +64,6 @@ def test_resource_list(reqres_resource):
     assert response.status_code == status.HTTP_200_OK
     assert response.method == 'GET'
     assert response.url == 'https://reqres.in/api/users'
-    assert response.headers
-    assert response.body
 
 
 @vcr.use_cassette()
@@ -75,8 +73,6 @@ def test_resource_create(reqres_resource):
     assert response.status_code == status.HTTP_201_CREATED
     assert response.method == 'POST'
     assert response.url == 'https://reqres.in/api/users'
-    assert response.headers
-    assert response.body
 
 
 @vcr.use_cassette()
@@ -86,8 +82,6 @@ def test_resource_retrieve(reqres_resource):
     assert response.status_code == status.HTTP_200_OK
     assert response.method == 'GET'
     assert response.url == 'https://reqres.in/api/users/2'
-    assert response.headers
-    assert response.body
 
 
 @vcr.use_cassette()
@@ -98,8 +92,6 @@ def test_resource_update(reqres_resource):
     assert response.status_code == status.HTTP_200_OK
     assert response.method == 'PUT'
     assert response.url == 'https://reqres.in/api/users/2'
-    assert response.headers
-    assert response.body
 
 
 @vcr.use_cassette()
@@ -110,8 +102,6 @@ def test_resource_partial_update(reqres_resource):
     assert response.status_code == status.HTTP_200_OK
     assert response.method == 'PATCH'
     assert response.url == 'https://reqres.in/api/users/2'
-    assert response.headers
-    assert response.body
 
 
 @vcr.use_cassette()
@@ -121,5 +111,3 @@ def test_resource_destroy(reqres_resource):
     assert response.status_code == status.HTTP_204_NO_CONTENT
     assert response.method == 'DELETE'
     assert response.url == 'https://reqres.in/api/users/2'
-    assert response.headers
-    assert response.body == ''
