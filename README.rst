@@ -36,3 +36,15 @@ How to use
     {'Date': 'Thu, 13 Apr 2017 10:57:02 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Set-Cookie': '__cfduid=d8352c249f38c47e35d8e21c7e3c93edc1492081022; expires=Fri, 13-Apr-18 10:57:02 GMT; path=/; domain=.reqres.in; HttpOnly', 'X-Powered-By': 'Express', 'Access-Control-Allow-Origin': '*', 'ETag': 'W/"1be-q96WkDv6JqfLvIPiRhzWJQ"', 'Server': 'cloudflare-nginx', 'CF-RAY': '34ede6f6b8ba4c3c-GRU', 'Content-Encoding': 'gzip'}
     >>> response.status_code
     200
+
+
+.. |TravisCI Build Status| image:: https://travis-ci.org/allisson/python-simple-rest-client.svg?branch=master
+   :target: https://travis-ci.org/allisson/python-simple-rest-client
+.. |Coverage Status| image:: https://coveralls.io/repos/github/georgeyk/loafer/badge.svg?branch=master
+   :target: https://coveralls.io/github/georgeyk/loafer?branch=master
+.. |Requirements Status| image:: https://requires.io/github/georgeyk/loafer/requirements.svg?branch=master
+   :target: https://requires.io/github/georgeyk/loafer/requirements/?branch=master
+.. |Scrutinizer Code Quality| image:: https://scrutinizer-ci.com/g/georgeyk/loafer/badges/quality-score.png?b=master
+   :target: https://scrutinizer-ci.com/g/georgeyk/loafer/?branch=master
+.. |Code Climate| image:: https://codeclimate.com/github/georgeyk/loafer/badges/gpa.svg
+   :target: https://codeclimate.com/github/georgeyk/loafer
