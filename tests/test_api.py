@@ -23,15 +23,6 @@ def test_api_add_resource_with_other_resource_class(api, reqres_resource):
             return True
 
     api.add_resource(resource_name='users', resource_class=AnotherResource)
-    assert isinstance(api.users, Resource)
-    assert api.users.api_root_url == reqres_resource.api_root_url
-    assert api.users.resource_name == reqres_resource.resource_name
-    assert api.users.headers == reqres_resource.headers
-    assert api.users.action_urls == reqres_resource.action_urls
-    assert api.users.timeout == reqres_resource.timeout
-    assert api.users.append_slash == reqres_resource.append_slash
-    assert api.users.json_encode_body == reqres_resource.json_encode_body
-    assert 'users' in api._resources
     assert api.users.extra_action()
 
 
