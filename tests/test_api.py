@@ -7,13 +7,12 @@ from tests.vcr import vcr
 def test_api_add_resource(api, reqres_resource):
     api.add_resource(resource_name='users')
     assert isinstance(api.users, Resource)
-    assert api.users.api_root_url == reqres_resource.api_root_url
-    assert api.users.resource_name == reqres_resource.resource_name
-    assert api.users.headers == reqres_resource.headers
-    assert api.users.action_urls == reqres_resource.action_urls
-    assert api.users.timeout == reqres_resource.timeout
-    assert api.users.append_slash == reqres_resource.append_slash
-    assert api.users.json_encode_body == reqres_resource.json_encode_body
+    attrs = (
+        'api_root_url', 'resource_name', 'headers', 'action_urls', 'timeout',
+        'append_slash', 'json_encode_body'
+    )
+    for attr in attrs:
+        assert getattr(api.users, attr) == getattr(reqres_resource, attr)
     assert 'users' in api._resources
 
 
