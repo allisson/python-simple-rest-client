@@ -35,10 +35,7 @@ def test_api_get_resource_list(api):
 
 
 @vcr.use_cassette()
-def test_reqres_api_users(reqres_api):
-    body = {'name': 'morpheus', 'job': 'leader'}
-    id = 2
-
+def test_reqres_api_users_list(reqres_api):
     response = reqres_api.users.list()
     assert response.status_code == status.HTTP_200_OK
     assert response.method == 'GET'
@@ -46,6 +43,10 @@ def test_reqres_api_users(reqres_api):
     assert response.headers
     assert response.body
 
+
+@vcr.use_cassette()
+def test_reqres_api_users_create(reqres_api):
+    body = {'name': 'morpheus', 'job': 'leader'}
     response = reqres_api.users.create(body=body)
     assert response.status_code == status.HTTP_201_CREATED
     assert response.method == 'POST'
@@ -53,6 +54,10 @@ def test_reqres_api_users(reqres_api):
     assert response.headers
     assert response.body
 
+
+@vcr.use_cassette()
+def test_reqres_api_users_retrieve(reqres_api):
+    id = 2
     response = reqres_api.users.retrieve(id)
     assert response.status_code == status.HTTP_200_OK
     assert response.method == 'GET'
@@ -60,6 +65,11 @@ def test_reqres_api_users(reqres_api):
     assert response.headers
     assert response.body
 
+
+@vcr.use_cassette()
+def test_reqres_api_users_update(reqres_api):
+    id = 2
+    body = {'name': 'morpheus', 'job': 'janitor'}
     response = reqres_api.users.update(id, body=body)
     assert response.status_code == status.HTTP_200_OK
     assert response.method == 'PUT'
@@ -67,6 +77,11 @@ def test_reqres_api_users(reqres_api):
     assert response.headers
     assert response.body
 
+
+@vcr.use_cassette()
+def test_reqres_api_users_partial_update(reqres_api):
+    id = 2
+    body = {'name': 'morpheus', 'job': 'janitor'}
     response = reqres_api.users.partial_update(id, body=body)
     assert response.status_code == status.HTTP_200_OK
     assert response.method == 'PATCH'
@@ -74,6 +89,10 @@ def test_reqres_api_users(reqres_api):
     assert response.headers
     assert response.body
 
+
+@vcr.use_cassette()
+def test_reqres_api_users_destroy(reqres_api):
+    id = 2
     response = reqres_api.users.destroy(id)
     assert response.status_code == status.HTTP_204_NO_CONTENT
     assert response.method == 'DELETE'

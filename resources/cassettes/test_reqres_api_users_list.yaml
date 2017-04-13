@@ -11,21 +11,21 @@ interactions:
   response:
     body:
       string: !!binary |
-        H4sIAAAAAAAAA6yO0WrDMAxF/+U+m5gkexj+lTGK6qiOixMZS2lhpf8+aAaF7rUv4krics4NlRIj
-        9A6V22FfRgcTo4LQD3/x8VGED4eJjBC+bsjTo3fKTe2w0sIISCwtMRwKPY/HstkMB7qQUUPAbFY1
-        eK9jRwv9yEpX7aIsfssniqx+n3bNZtx8pMJHSROvvh8+u3NNuLudP7zwyxZzKe8WOItyndU4/zcY
-        XwxEI7U386VwqpJkIr48Bb7vvwAAAP//AwDhQpdTvgEAAA==
+        H4sIAAAAAAAAA6yQUWvDMAyE/8s9m5gkexj+K2MU1VEdFycyltLCSv/7oBmUba99ESeJ4z7uhkqJ
+        EXqHyu2wL6ODiVFB6Icf+fgowpvDREYIHzfk6eE75aZ2WGlhBCSWlhgOhZ7HY9lshgNdyKghYDar
+        GrzXsaOFvmSlq3ZRFr/lE0VWv0+7ZjNuPlLho6SJV98P7925Jtzdnj84/MovW8ylvBrgLMp1VuP8
+        n2D8QyAaqb24ACmcqiSZiC/PCj7v3wAAAP//AwDhQpdTvgEAAA==
     headers:
       Access-Control-Allow-Origin: ['*']
-      CF-RAY: [34ee374e5dae4a96-GRU]
+      CF-RAY: [34ee3732bc034b57-GRU]
       Connection: [keep-alive]
       Content-Encoding: [gzip]
       Content-Type: [application/json; charset=utf-8]
-      Date: ['Thu, 13 Apr 2017 11:51:53 GMT']
+      Date: ['Thu, 13 Apr 2017 11:51:49 GMT']
       ETag: [W/"1be-q96WkDv6JqfLvIPiRhzWJQ"]
       Server: [cloudflare-nginx]
-      Set-Cookie: ['__cfduid=d749cd32d5706a12ce371d5ebccf6a1d31492084313; expires=Fri,
-          13-Apr-18 11:51:53 GMT; path=/; domain=.reqres.in; HttpOnly']
+      Set-Cookie: ['__cfduid=dbbe15170c775f42862fa76b94f3782a11492084308; expires=Fri,
+          13-Apr-18 11:51:48 GMT; path=/; domain=.reqres.in; HttpOnly']
       X-Powered-By: [Express]
     status: {code: 200, message: OK}
 version: 1

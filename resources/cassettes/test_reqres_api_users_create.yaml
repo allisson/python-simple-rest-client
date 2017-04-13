@@ -10,18 +10,18 @@ interactions:
     method: POST
     uri: https://reqres.in/api/users
   response:
-    body: {string: '{"id":"435","createdAt":"2017-04-13T11:51:53.891Z"}'}
+    body: {string: '{"id":"261","createdAt":"2017-04-13T11:51:49.737Z"}'}
     headers:
       Access-Control-Allow-Origin: ['*']
-      CF-RAY: [34ee37530fe44b7b-GRU]
+      CF-RAY: [34ee3737e81d4b09-GRU]
       Connection: [keep-alive]
       Content-Length: ['51']
       Content-Type: [application/json; charset=utf-8]
-      Date: ['Thu, 13 Apr 2017 11:51:54 GMT']
-      ETag: [W/"33-CogUGe4MCsAsC9LJO97qJg"]
+      Date: ['Thu, 13 Apr 2017 11:51:50 GMT']
+      ETag: [W/"33-+QWsuBDzQRK10yaw9BgYvA"]
       Server: [cloudflare-nginx]
-      Set-Cookie: ['__cfduid=ddafb6f31d5512006ca92a5adcf2249001492084314; expires=Fri,
-          13-Apr-18 11:51:54 GMT; path=/; domain=.reqres.in; HttpOnly']
+      Set-Cookie: ['__cfduid=d1463b89bbfd07ee57b087c51820138131492084309; expires=Fri,
+          13-Apr-18 11:51:49 GMT; path=/; domain=.reqres.in; HttpOnly']
       X-Powered-By: [Express]
     status: {code: 201, message: Created}
 version: 1

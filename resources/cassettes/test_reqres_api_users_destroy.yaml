@@ -13,13 +13,13 @@ interactions:
     body: {string: ''}
     headers:
       Access-Control-Allow-Origin: ['*']
-      CF-RAY: [34ee37624a7e4b57-GRU]
+      CF-RAY: [34ee374ab8104ca8-GRU]
       Connection: [keep-alive]
-      Date: ['Thu, 13 Apr 2017 11:51:56 GMT']
+      Date: ['Thu, 13 Apr 2017 11:51:52 GMT']
       ETag: [W/"2-mZFLkyvTelC5g8XnyQrpOw"]
       Server: [cloudflare-nginx]
-      Set-Cookie: ['__cfduid=dab27ac7f46b9dd9e829ec8ce3c33ab1e1492084316; expires=Fri,
-          13-Apr-18 11:51:56 GMT; path=/; domain=.reqres.in; HttpOnly']
+      Set-Cookie: ['__cfduid=d21ee26bb9ffeb2ccbe0d7ca1636b84951492084312; expires=Fri,
+          13-Apr-18 11:51:52 GMT; path=/; domain=.reqres.in; HttpOnly']
       X-Powered-By: [Express]
     status: {code: 204, message: No Content}
 version: 1

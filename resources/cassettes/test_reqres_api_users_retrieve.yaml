@@ -16,15 +16,15 @@ interactions:
         x7S1N67rCwAA//8DABCBE0eKAAAA
     headers:
       Access-Control-Allow-Origin: ['*']
-      CF-RAY: [34ee3756a9134a72-GRU]
+      CF-RAY: [34ee373dec2b4ba5-GRU]
       Connection: [keep-alive]
       Content-Encoding: [gzip]
       Content-Type: [application/json; charset=utf-8]
-      Date: ['Thu, 13 Apr 2017 11:51:54 GMT']
+      Date: ['Thu, 13 Apr 2017 11:51:50 GMT']
       ETag: [W/"8a-lOrFpQVA2OFa0hIdWYiM0A"]
       Server: [cloudflare-nginx]
-      Set-Cookie: ['__cfduid=d7c22eb5d460df5b9850572d971f1efd21492084314; expires=Fri,
-          13-Apr-18 11:51:54 GMT; path=/; domain=.reqres.in; HttpOnly']
+      Set-Cookie: ['__cfduid=d6775a1cbe4573c2bb2c6e2117491f8f81492084310; expires=Fri,
+          13-Apr-18 11:51:50 GMT; path=/; domain=.reqres.in; HttpOnly']
       X-Powered-By: [Express]
     status: {code: 200, message: OK}
 version: 1
