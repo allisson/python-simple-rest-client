@@ -12,10 +12,11 @@ logger = logging.getLogger(__name__)
 
 class BaseResource:
     def __init__(self, api_root_url=None, resource_name=None, action_urls={},
-                 headers={}, timeout=None, append_slash=False,
+                 params={}, headers={}, timeout=None, append_slash=False,
                  json_encode_body=False):
         self.api_root_url = api_root_url
         self.resource_name = resource_name
+        self.params = params
         self.headers = headers
         self.action_urls = action_urls or self.get_default_action_urls()
         self.timeout = timeout or 3
@@ -50,6 +51,8 @@ class Resource(BaseResource):
     def make_request(self, request):
         logger.debug('operation=request_started, request={!r}'.format(request))
         method = getattr(self.session, request.method.lower())
+        request.params.update(self.params)
+        request.headers.update(self.headers)
         client_response = method(
             request.url,
             params=request.params,
@@ -76,56 +79,56 @@ class Resource(BaseResource):
         )
         return response
 
-    def list(self, *args, **kwargs):
+    def list(self, *args, params={}, headers={}):
         url = self.get_full_url('list', *args)
         request = Request(
-            url=url, method='GET', params=kwargs, body=None,
-            headers=self.headers, timeout=self.timeout
+            url=url, method='GET', params=params, body=None, headers=headers,
+            timeout=self.timeout
         )
         return self.make_request(request)
 
-    def create(self, *args, body=None, **kwargs):
+    def create(self, *args, body=None, params={}, headers={}):
         url = self.get_full_url('create', *args)
         if self.json_encode_body:
             body = json.dumps(body)
         request = Request(
-            url=url, method='POST', params=kwargs, body=body,
-            headers=self.headers, timeout=self.timeout
+            url=url, method='POST', params=params, body=body, headers=headers,
+            timeout=self.timeout
         )
         return self.make_request(request)
 
-    def retrieve(self, *args, **kwargs):
+    def retrieve(self, *args, params={}, headers={}):
         url = self.get_full_url('retrieve', *args)
         request = Request(
-            url=url, method='GET', params=kwargs, body=None,
-            headers=self.headers, timeout=self.timeout
+            url=url, method='GET', params=params, body=None, headers=headers,
+            timeout=self.timeout
         )
         return self.make_request(request)
 
-    def update(self, *args, body=None, **kwargs):
+    def update(self, *args, body=None, params={}, headers={}):
         url = self.get_full_url('update', *args)
         if self.json_encode_body and body:
             body = json.dumps(body)
         request = Request(
-            url=url, method='PUT', params=kwargs, body=body,
-            headers=self.headers, timeout=self.timeout
+            url=url, method='PUT', params=params, body=body, headers=headers,
+            timeout=self.timeout
         )
         return self.make_request(request)
 
-    def partial_update(self, *args, body=None, **kwargs):
+    def partial_update(self, *args, body=None, params={}, headers={}):
         url = self.get_full_url('partial_update', *args)
         if self.json_encode_body and body:
             body = json.dumps(body)
         request = Request(
-            url=url, method='PATCH', params=kwargs, body=body,
-            headers=self.headers, timeout=self.timeout
+            url=url, method='PATCH', params=params, body=body, headers=headers,
+            timeout=self.timeout
         )
         return self.make_request(request)
 
-    def destroy(self, *args, **kwargs):
+    def destroy(self, *args, params={}, headers={}):
         url = self.get_full_url('destroy', *args)
         request = Request(
-            url=url, method='DELETE', params=kwargs, body=None,
-            headers=self.headers, timeout=self.timeout
+            url=url, method='DELETE', params=params, body=None,
+            headers=headers, timeout=self.timeout
         )
         return self.make_request(request)
