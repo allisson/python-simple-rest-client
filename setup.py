@@ -24,8 +24,18 @@ with codecs.open(os.path.join(here, 'README.rst'), encoding='utf-8') as f:
 with codecs.open(os.path.join(here, 'CHANGES.rst'), encoding='utf-8') as f:
     changelog = f.read()
 
-with codecs.open(os.path.join(here, 'requirements.txt')) as f:
-    install_requires = f.readlines()
+
+install_requirements = [
+    'requests>=2.13.0',
+    'json-encoder>=0.4.4',
+    'python-status>=1.0.1',
+]
+tests_requirements = [
+    'pytest',
+    'pytest-cov',
+    'vcrpy',
+    'coveralls',
+]
 
 
 class VersionCommand(Command):
@@ -59,7 +69,8 @@ setup(
     ],
     keywords='rest client http',
     packages=find_packages(exclude=['docs', 'tests*']),
-    install_requires=install_requires,
+    install_requires=install_requirements,
+    tests_require=tests_requirements,
     cmdclass={
         'version': VersionCommand,
     },
