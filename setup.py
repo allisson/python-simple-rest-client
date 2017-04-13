@@ -69,6 +69,7 @@ setup(
     ],
     keywords='rest client http',
     packages=find_packages(exclude=['docs', 'tests*']),
+    setup_requires=['pytest-runner'],
     install_requires=install_requirements,
     tests_require=tests_requirements,
     cmdclass={
