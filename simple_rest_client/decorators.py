@@ -14,20 +14,11 @@ logger = logging.getLogger(__name__)
 
 
 def validate_response(response):
-    error_suffix = (
-        ' url={}, '
-        'method={}, '
-        'body={!r}, '
-        'headers={!r}, '
-        'status_code={}'.format(
-            response.url, response.method, response.body, response.headers,
-            response.status_code
-        )
-    )
+    error_suffix = ' response={!r}'.format(response)
     if status.is_client_error(code=response.status_code):
-        raise ClientError('operation=client_error,' + error_suffix)
+        raise ClientError('operation=client_error,' + error_suffix, response)
     if status.is_server_error(code=response.status_code):
-        raise ServerError('operation=server_error,' + error_suffix)
+        raise ServerError('operation=server_error,' + error_suffix, response)
 
 
 def handle_request_error(f):

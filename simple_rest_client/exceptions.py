@@ -10,9 +10,15 @@ class ClientConnectionError(Exception):
     pass
 
 
-class ClientError(Exception):
+class ErrorWithResponse(Exception):
+    def __init__(self, message, response):
+        self.message = message
+        self.response = response
+
+
+class ClientError(ErrorWithResponse):
     pass
 
 
-class ServerError(Exception):
+class ServerError(ErrorWithResponse):
     pass

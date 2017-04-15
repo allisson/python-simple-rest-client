@@ -20,8 +20,10 @@ def test_validate_response_server_error(status_code):
         url='http://example.com', method='GET', body=None, headers={},
         status_code=status_code
     )
-    with pytest.raises(ServerError):
+    with pytest.raises(ServerError) as excinfo:
         validate_response(response)
+    assert excinfo.value.response.status_code == status_code
+    assert 'operation=server_error' in str(excinfo.value)
 
 
 @pytest.mark.parametrize('status_code', range(400, 417))
@@ -30,8 +32,10 @@ def test_validate_response_client_error(status_code):
         url='http://example.com', method='GET', body=None, headers={},
         status_code=status_code
     )
-    with pytest.raises(ClientError):
+    with pytest.raises(ClientError) as excinfo:
         validate_response(response)
+    assert excinfo.value.response.status_code == status_code
+    assert 'operation=client_error' in str(excinfo.value)
 
 
 @pytest.mark.parametrize('side_effect', (Timeout, RequestsConnectionError))
