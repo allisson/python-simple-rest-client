@@ -11,19 +11,22 @@ logger = logging.getLogger(__name__)
 
 
 class BaseResource:
-    def __init__(self, api_root_url=None, resource_name=None, action_urls={},
-                 params={}, headers={}, timeout=None, append_slash=False,
+    action_urls = {}
+
+    def __init__(self, api_root_url=None, resource_name=None, params={},
+                 headers={}, timeout=None, append_slash=False,
                  json_encode_body=False):
         self.api_root_url = api_root_url
         self.resource_name = resource_name
         self.params = params
         self.headers = headers
-        self.action_urls = action_urls or self.get_default_action_urls()
         self.timeout = timeout or 3
         self.append_slash = append_slash
         self.json_encode_body = json_encode_body
+        self.action_urls = self.action_urls or self.default_action_urls
 
-    def get_default_action_urls(self):
+    @property
+    def default_action_urls(self):
         return {
             'list': self.resource_name,
             'create': self.resource_name,

@@ -9,16 +9,28 @@ def base_resource():
     return BaseResource
 
 
+custom_action_urls = {
+    'list': '{}/users',
+    'create': '{}/users',
+    'retrieve': '{}/users/{}',
+    'update': '{}/users/{}',
+    'partial_update': '{}/users/{}',
+    'destroy': '{}/users/{}'
+}
+
+
 @pytest.fixture
 def action_urls():
-    return {
-        'list': '{}/users',
-        'create': '{}/users',
-        'retrieve': '{}/users/{}',
-        'update': '{}/users/{}',
-        'partial_update': '{}/users/{}',
-        'destroy': '{}/users/{}'
-    }
+    return custom_action_urls
+
+
+class CustomResource(Resource):
+    action_urls = custom_action_urls
+
+
+@pytest.fixture
+def custom_resource():
+    return CustomResource
 
 
 @pytest.fixture

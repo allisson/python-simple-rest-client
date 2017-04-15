@@ -13,14 +13,12 @@ class API:
         self._resources = {}
 
     def add_resource(self, api_root_url=None, resource_name=None,
-                     resource_class=None, action_urls={}, params={},
-                     headers={}, timeout=None, append_slash=False,
-                     json_encode_body=False):
+                     resource_class=None, params={}, headers={}, timeout=None,
+                     append_slash=False, json_encode_body=False):
         resource_class = resource_class or Resource
         resource = resource_class(
             api_root_url=api_root_url or self.api_root_url,
             resource_name=resource_name,
-            action_urls=action_urls,
             params=params or self.params,
             headers=headers or self.headers,
             timeout=timeout or self.timeout,
