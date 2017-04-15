@@ -36,10 +36,10 @@ Let's start building a client for users resource in https://reqres.in/ service::
     >>> response = api.users.update(2, body=body, params={}, headers={}) # update action
     >>> response.status_code
     200
-    >>> response = api.users.partial_update(2, body=body, params={}, headers={})
+    >>> response = api.users.partial_update(2, body=body, params={}, headers={}) # partial update action
     >>> response.status_code
     200
-    >>> response = api.users.destroy(2, body=None, params={}, headers={})
+    >>> response = api.users.destroy(2, body=None, params={}, headers={}) # destroy action
     >>> response.status_code
     204
 
