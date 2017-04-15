@@ -8,7 +8,7 @@ def test_api_add_resource(api, reqres_resource):
     api.add_resource(resource_name='users')
     assert isinstance(api.users, Resource)
     attrs = (
-        'api_root_url', 'resource_name', 'headers', 'action_urls', 'timeout',
+        'api_root_url', 'resource_name', 'headers', 'actions', 'timeout',
         'append_slash', 'json_encode_body'
     )
     for attr in attrs:

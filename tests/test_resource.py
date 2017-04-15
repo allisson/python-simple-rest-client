@@ -1,68 +1,62 @@
 import pytest
 import status
 
+from simple_rest_client.exceptions import ActionNotFound, ActionURLMatchError
 from tests.vcr import vcr
 
 
-def test_base_resource_action_urls(base_resource):
+def test_base_resource_actions(base_resource):
     resource = base_resource(api_root_url='http://example.com', resource_name='users')
-    assert resource.action_urls == resource.default_action_urls
+    assert resource.actions == resource.default_actions
 
 
-def test_base_resource_get_full_url(base_resource):
+def test_base_resource_get_action_full_url(base_resource):
     resource = base_resource(api_root_url='http://example.com', resource_name='users')
-    assert resource.get_full_url('list') == 'http://example.com/users'
-    assert resource.get_full_url('create') == 'http://example.com/users'
-    assert resource.get_full_url('retrieve', 1) == 'http://example.com/users/1'
-    assert resource.get_full_url('update', 1) == 'http://example.com/users/1'
-    assert resource.get_full_url('partial_update', 1) == 'http://example.com/users/1'
-    assert resource.get_full_url('destroy', 1) == 'http://example.com/users/1'
+    assert resource.get_action_full_url('list') == 'http://example.com/users'
+    assert resource.get_action_full_url('create') == 'http://example.com/users'
+    assert resource.get_action_full_url('retrieve', 1) == 'http://example.com/users/1'
+    assert resource.get_action_full_url('update', 1) == 'http://example.com/users/1'
+    assert resource.get_action_full_url('partial_update', 1) == 'http://example.com/users/1'
+    assert resource.get_action_full_url('destroy', 1) == 'http://example.com/users/1'
 
 
-def test_base_resource_get_full_url_with_append_slash(base_resource):
+def test_base_resource_get_action_full_url_with_append_slash(base_resource):
     resource = base_resource(api_root_url='http://example.com', resource_name='users', append_slash=True)
-    assert resource.get_full_url('list') == 'http://example.com/users/'
-    assert resource.get_full_url('create') == 'http://example.com/users/'
-    assert resource.get_full_url('retrieve', 1) == 'http://example.com/users/1/'
-    assert resource.get_full_url('update', 1) == 'http://example.com/users/1/'
-    assert resource.get_full_url('partial_update', 1) == 'http://example.com/users/1/'
-    assert resource.get_full_url('destroy', 1) == 'http://example.com/users/1/'
+    assert resource.get_action_full_url('list') == 'http://example.com/users/'
+    assert resource.get_action_full_url('create') == 'http://example.com/users/'
+    assert resource.get_action_full_url('retrieve', 1) == 'http://example.com/users/1/'
+    assert resource.get_action_full_url('update', 1) == 'http://example.com/users/1/'
+    assert resource.get_action_full_url('partial_update', 1) == 'http://example.com/users/1/'
+    assert resource.get_action_full_url('destroy', 1) == 'http://example.com/users/1/'
 
 
-def test_base_resource_get_full_url_with_invalid_action(base_resource):
+def test_base_resource_get_action_full_url_with_action_not_found(base_resource):
     resource = base_resource(api_root_url='http://example.com', resource_name='users')
-    with pytest.raises(ValueError) as execinfo:
-        resource.get_full_url('listy')
-    assert 'No url match for "listy"' in str(execinfo)
+    with pytest.raises(ActionNotFound) as execinfo:
+        resource.get_action_full_url('notfoundaction')
+    assert 'action "notfoundaction" not found' in str(execinfo)
 
 
-def test_base_resource_build_request_instance(base_resource):
-    resource = base_resource(
-        api_root_url='http://example.com', resource_name='users',
-        json_encode_body=True
-    )
-    request = resource.build_request_instance(
-        1, action_name='update', method='PUT', params={}, body={'body': True},
-        headers={}, timeout=3
-    )
-    assert request.url == 'http://example.com/users/1'
-    assert request.method == 'PUT'
-    assert request.body == '{"body": true}'
+def test_base_resource_get_action_full_url_with_action_url_match_error(base_resource):
+    resource = base_resource(api_root_url='http://example.com', resource_name='users')
+    with pytest.raises(ActionURLMatchError) as execinfo:
+        resource.get_action_full_url('retrieve')
+    assert 'No url match for "retrieve"' in str(execinfo)
 
 
-def test_custom_resource_action_urls(custom_resource, action_urls):
+def test_custom_resource_actions(custom_resource, actions):
     resource = custom_resource(api_root_url='http://example.com', resource_name='users')
-    assert resource.action_urls == action_urls
+    assert resource.actions == actions
 
 
-def test_custom_resource_get_full_url(custom_resource):
+def test_custom_resource_get_action_full_url(custom_resource):
     resource = custom_resource(api_root_url='http://example.com', resource_name='users')
-    assert resource.get_full_url('list', 1) == 'http://example.com/1/users'
-    assert resource.get_full_url('create', 1) == 'http://example.com/1/users'
-    assert resource.get_full_url('retrieve', 1, 2) == 'http://example.com/1/users/2'
-    assert resource.get_full_url('update', 1, 2) == 'http://example.com/1/users/2'
-    assert resource.get_full_url('partial_update', 1, 2) == 'http://example.com/1/users/2'
-    assert resource.get_full_url('destroy', 1, 2) == 'http://example.com/1/users/2'
+    assert resource.get_action_full_url('list', 1) == 'http://example.com/1/users'
+    assert resource.get_action_full_url('create', 1) == 'http://example.com/1/users'
+    assert resource.get_action_full_url('retrieve', 1, 2) == 'http://example.com/1/users/2'
+    assert resource.get_action_full_url('update', 1, 2) == 'http://example.com/1/users/2'
+    assert resource.get_action_full_url('partial_update', 1, 2) == 'http://example.com/1/users/2'
+    assert resource.get_action_full_url('destroy', 1, 2) == 'http://example.com/1/users/2'
 
 
 @vcr.use_cassette()
