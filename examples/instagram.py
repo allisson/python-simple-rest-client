@@ -21,5 +21,5 @@ instagram_api = API(
 instagram_api.add_resource(resource_name='users', resource_class=UserResource)
 print('instagram_api.users.search={!r}'.format(instagram_api.users.search(params={'q': 'allissonazevedo'}).body))
 print('instagram_api.users.retrieve={!r}'.format(instagram_api.users.retrieve('self').body))
-print('nstagram_api.users.retrieve_media={!r}'.format(instagram_api.users.retrieve_media('self').body))
+print('instagram_api.users.retrieve_media={!r}'.format(instagram_api.users.retrieve_media('self').body))
 print('instagram_api.users.retrieve_likes={!r}'.format(instagram_api.users.retrieve_likes().body))
