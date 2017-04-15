@@ -6,7 +6,9 @@ from requests.exceptions import (
 )
 import status
 
-from simple_rest_client.exceptions import ClientError, ServerError
+from simple_rest_client.exceptions import (
+    ClientConnectionError, ClientError, ServerError
+)
 
 logger = logging.getLogger(__name__)
 
@@ -35,7 +37,7 @@ def handle_request_error(f):
             response = f(*args, **kwargs)
         except (Timeout, ReadTimeout, RequestsConnectionError) as exc:
             logger.exception(exc)
-            raise ServerError() from exc
+            raise ClientConnectionError() from exc
 
         validate_response(response)
 

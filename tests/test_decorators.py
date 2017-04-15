@@ -8,7 +8,9 @@ from requests.exceptions import (
 from simple_rest_client.decorators import (
     handle_request_error, validate_response
 )
-from simple_rest_client.exceptions import ClientError, ServerError
+from simple_rest_client.exceptions import (
+    ClientConnectionError, ClientError, ServerError
+)
 from simple_rest_client.models import Response
 
 
@@ -35,5 +37,5 @@ def test_validate_response_client_error(status_code):
 @pytest.mark.parametrize('side_effect', (Timeout, RequestsConnectionError))
 def test_handle_request_error_exceptions(side_effect):
     wrapped = mock.Mock(side_effect=side_effect)
-    with pytest.raises(ServerError):
+    with pytest.raises(ClientConnectionError):
         handle_request_error(wrapped)()

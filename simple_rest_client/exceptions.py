@@ -6,6 +6,10 @@ class ActionURLMatchError(Exception):
     pass
 
 
+class ClientConnectionError(Exception):
+    pass
+
+
 class ClientError(Exception):
     pass
 
