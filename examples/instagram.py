@@ -12,6 +12,7 @@ class UserResource(Resource):
 
 
 # https://www.slickremix.com/docs/how-to-create-instagram-access-token/
+# get token with public_content scope
 default_params = {'access_token': 'valid-token'}
 instagram_api = API(
     api_root_url='https://api.instagram.com/v1/', params=default_params,
