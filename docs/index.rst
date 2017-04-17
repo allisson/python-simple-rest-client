@@ -6,18 +6,13 @@
 Welcome to python-simple-rest-client's documentation!
 =====================================================
 
+Simple REST client for python 3.5+
+
+
+Contents
+---------
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
 
    installation
    quickstart
-
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
