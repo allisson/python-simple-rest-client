@@ -1,7 +1,10 @@
 -r requirements.txt
 pytest
 pytest-cov
-vcrpy
+pytest-asyncio
+responses
+aioresponses
+asynctest
 coveralls
 Sphinx
 twine

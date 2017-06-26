@@ -6,7 +6,7 @@
 Welcome to python-simple-rest-client's documentation!
 =====================================================
 
-Simple REST client for python 3.5+
+Simple REST client for python 3.5+, supports sync (with requests) and asyncio (with aiohttp) requests
 
 
 Contents

@@ -29,6 +29,7 @@ install_requirements = [
     'requests>=2.13.0',
     'json-encoder>=0.4.4',
     'python-status>=1.0.1',
+    'aiohttp>=2.2.0',
 ]
 tests_requirements = [
     'pytest',
@@ -67,7 +68,7 @@ setup(
         'Programming Language :: Python :: 3.6',
         'Topic :: Software Development :: Libraries',
     ],
-    keywords='rest client http',
+    keywords='rest client http asyncio',
     packages=find_packages(exclude=['docs', 'tests*']),
     setup_requires=['pytest-runner'],
     install_requires=install_requirements,

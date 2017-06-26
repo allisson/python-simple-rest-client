@@ -1,7 +1,8 @@
-import status
+import pytest
+import responses
+from aioresponses import aioresponses
 
 from simple_rest_client.resource import Resource
-from tests.vcr import vcr
 
 
 def test_api_add_resource(api, reqres_resource):
@@ -33,56 +34,45 @@ def test_api_get_resource_list(api):
     assert 'login' in resource_list
 
 
-@vcr.use_cassette()
-def test_reqres_api_users_list(reqres_api):
-    response = reqres_api.users.list()
-    assert response.status_code == status.HTTP_200_OK
-    assert response.method == 'GET'
-    assert response.url == 'https://reqres.in/api/users'
+@pytest.mark.parametrize('url,method,status,action,args,kwargs', [
+    ('https://reqres.in/api/users', 'GET', 200, 'list', None, {}),
+    ('https://reqres.in/api/users', 'POST', 201, 'create', None, {'body': {'success': True}}),
+    ('https://reqres.in/api/users/2', 'GET', 200, 'retrieve', 2, {'body': {'success': True}}),
+    ('https://reqres.in/api/users/2', 'PUT', 200, 'update', 2, {'body': {'success': True}}),
+    ('https://reqres.in/api/users/2', 'PATCH', 200, 'partial_update', 2, {'body': {'success': True}}),
+    ('https://reqres.in/api/users/2', 'DELETE', 204, 'destroy', 2, {'body': {'success': True}}),
+])
+@responses.activate
+def test_reqres_api_users_actions(url, method, status, action, args, kwargs, reqres_api):
+    responses.add(
+        getattr(responses, method),
+        url,
+        json={'success': True},
+        status=status
+    )
+
+    response = getattr(reqres_api.users, action)(args, **kwargs)
+    assert response.status_code == status
+    assert response.method == method
+    assert response.url == url
+    assert response.body == {'success': True}
 
 
-@vcr.use_cassette()
-def test_reqres_api_users_create(reqres_api):
-    body = {'name': 'morpheus', 'job': 'leader'}
-    response = reqres_api.users.create(body=body)
-    assert response.status_code == status.HTTP_201_CREATED
-    assert response.method == 'POST'
-    assert response.url == 'https://reqres.in/api/users'
-
-
-@vcr.use_cassette()
-def test_reqres_api_users_retrieve(reqres_api):
-    id = 2
-    response = reqres_api.users.retrieve(id)
-    assert response.status_code == status.HTTP_200_OK
-    assert response.method == 'GET'
-    assert response.url == 'https://reqres.in/api/users/2'
-
-
-@vcr.use_cassette()
-def test_reqres_api_users_update(reqres_api):
-    id = 2
-    body = {'name': 'morpheus', 'job': 'janitor'}
-    response = reqres_api.users.update(id, body=body)
-    assert response.status_code == status.HTTP_200_OK
-    assert response.method == 'PUT'
-    assert response.url == 'https://reqres.in/api/users/2'
-
-
-@vcr.use_cassette()
-def test_reqres_api_users_partial_update(reqres_api):
-    id = 2
-    body = {'name': 'morpheus', 'job': 'janitor'}
-    response = reqres_api.users.partial_update(id, body=body)
-    assert response.status_code == status.HTTP_200_OK
-    assert response.method == 'PATCH'
-    assert response.url == 'https://reqres.in/api/users/2'
-
-
-@vcr.use_cassette()
-def test_reqres_api_users_destroy(reqres_api):
-    id = 2
-    response = reqres_api.users.destroy(id)
-    assert response.status_code == status.HTTP_204_NO_CONTENT
-    assert response.method == 'DELETE'
-    assert response.url == 'https://reqres.in/api/users/2'
+@pytest.mark.asyncio
+@pytest.mark.parametrize('url,method,status,action,args,kwargs', [
+    ('https://reqres.in/api/users', 'GET', 200, 'list', None, {}),
+    ('https://reqres.in/api/users', 'POST', 201, 'create', None, {'body': {'success': True}}),
+    ('https://reqres.in/api/users/2', 'GET', 200, 'retrieve', 2, {'body': {'success': True}}),
+    ('https://reqres.in/api/users/2', 'PUT', 200, 'update', 2, {'body': {'success': True}}),
+    ('https://reqres.in/api/users/2', 'PATCH', 200, 'partial_update', 2, {'body': {'success': True}}),
+    ('https://reqres.in/api/users/2', 'DELETE', 204, 'destroy', 2, {'body': {'success': True}}),
+])
+async def test_reqres_async_api_users_actions(url, method, status, action, args, kwargs, reqres_async_api):
+    with aioresponses() as mock_response:
+        mock_response_method = getattr(mock_response, method.lower())
+        mock_response_method(url, status=status, body=b'{"success": true}', headers={'Content-Type': 'application/json'})
+        response = await getattr(reqres_async_api.users, action)(args, **kwargs)
+    assert response.status_code == status
+    assert response.method == method
+    assert response.url == url
+    assert response.body == {'success': True}

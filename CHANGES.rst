@@ -1,6 +1,11 @@
 Changelog
 ---------
 
+0.2.0
+~~~~~
+
+* Add asyncio support (aiohttp).
+
 0.1.1
 ~~~~~
 

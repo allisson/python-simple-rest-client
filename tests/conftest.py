@@ -1,6 +1,6 @@
 import pytest
 
-from simple_rest_client.resource import BaseResource, Resource
+from simple_rest_client.resource import BaseResource, Resource, AsyncResource
 from simple_rest_client.api import API
 
 
@@ -60,6 +60,14 @@ def reqres_resource():
 
 
 @pytest.fixture
+def reqres_async_resource():
+    return AsyncResource(
+        api_root_url='https://reqres.in/api/', resource_name='users',
+        json_encode_body=True
+    )
+
+
+@pytest.fixture
 def api():
     return API(api_root_url='https://reqres.in/api/', json_encode_body=True)
 
@@ -67,5 +75,10 @@ def api():
 @pytest.fixture
 def reqres_api(api):
     api.add_resource(resource_name='users')
-    api.add_resource(resource_name='login')
+    return api
+
+
+@pytest.fixture
+def reqres_async_api(api):
+    api.add_resource(resource_name='users', resource_class=AsyncResource)
     return api
