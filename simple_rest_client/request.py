@@ -34,7 +34,8 @@ def make_request(session, request):
         method=method,
         body=body,
         headers=client_response.headers,
-        status_code=client_response.status_code
+        status_code=client_response.status_code,
+        client_response=client_response
     )
     logger.debug(
         'operation=request_finished, request={!r}, response={!r}'.format(
@@ -64,7 +65,8 @@ async def make_async_request(session, request):
                 method=method,
                 body=body,
                 headers=dict(client_response.headers),
-                status_code=client_response.status
+                status_code=client_response.status,
+                client_response=client_response
             )
             logger.info(
                 'operation=request_finished, request={!r}, response={!r}'.format(

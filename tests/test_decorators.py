@@ -25,7 +25,7 @@ from simple_rest_client.models import Response
 def test_validate_response_server_error(status_code):
     response = Response(
         url='http://example.com', method='GET', body=None, headers={},
-        status_code=status_code
+        status_code=status_code, client_response=mock.Mock()
     )
     with pytest.raises(ServerError) as excinfo:
         validate_response(response)
@@ -37,7 +37,7 @@ def test_validate_response_server_error(status_code):
 def test_validate_response_client_error(status_code):
     response = Response(
         url='http://example.com', method='GET', body=None, headers={},
-        status_code=status_code
+        status_code=status_code, client_response=mock.Mock()
     )
     with pytest.raises(ClientError) as excinfo:
         validate_response(response)
