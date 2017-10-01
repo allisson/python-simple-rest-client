@@ -29,6 +29,9 @@ Let's start building a client for users resource in https://reqres.in/ service::
     {'page': 1, 'per_page': 3, 'total': 12, 'total_pages': 4, 'data': [{'id': 1, 'first_name': 'george', 'last_name': 'bluth', 'avatar': 'https://s3.amazonaws.com/uifaces/faces/twitter/calebogden/128.jpg'}, {'id': 2, 'first_name': 'lucille', 'last_name': 'bluth', 'avatar': 'https://s3.amazonaws.com/uifaces/faces/twitter/josephstein/128.jpg'}, {'id': 3, 'first_name': 'oscar', 'last_name': 'bluth', 'avatar': 'https://s3.amazonaws.com/uifaces/faces/twitter/olegpogodaev/128.jpg'}]}
     >>> response.headers
     {'Date': 'Sat, 15 Apr 2017 21:39:46 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'X-Powered-By': 'Express', 'Access-Control-Allow-Origin': '*', 'ETag': 'W/"1be-q96WkDv6JqfLvIPiRhzWJQ"', 'Server': 'cloudflare-nginx', 'CF-RAY': '35020f33aaf04a9c-GRU', 'Content-Encoding': 'gzip'}
+    >>> response.client_response.cookies
+    <RequestsCookieJar[Cookie(version=0, name='__cfduid', value='d85187baf0752d02c6836abf7fb0c426c1506866165', port=None, port_specified=False, domain='.reqres.in', domain_specified=True, domain_initial_dot=True, path='/', path_specified=True, secure=False, expires=1538402165, discard=False, comment=None, comment_url=None, rest={'HttpOnly': None}, rfc2109=False)]>
+
     >>> response.status_code
     200
     >>> # create action
