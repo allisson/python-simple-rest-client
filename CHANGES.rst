@@ -1,6 +1,11 @@
 Changelog
 ---------
 
+0.3.0
+~~~~~
+
+* Add client_response in Response object.
+
 0.2.0
 ~~~~~
 
