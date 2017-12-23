@@ -18,7 +18,7 @@ post_test_server_api.add_resource(resource_name='file_upload', resource_class=Fi
 
 async def main():
     response = await post_test_server_api.file_upload.create(body=files)
-    print('httpbin_api.basic_auth.retrieve={!r}'.format(response.body))
+    print('post_test_server_api.file_upload.create={!r}'.format(response.body))
 
 loop = asyncio.get_event_loop()
 loop.run_until_complete(main())
