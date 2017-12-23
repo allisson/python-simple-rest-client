@@ -1,12 +1,12 @@
 -r requirements.txt
-pytest
-pytest-cov
-pytest-asyncio
-responses
 aioresponses
 asynctest
-coveralls
+codecov
+flake8
+pytest
+pytest-asyncio
+pytest-cov
+responses
 Sphinx
 twine
 wheel
-flake8
