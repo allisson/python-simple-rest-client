@@ -1,6 +1,7 @@
 from unittest import mock
 
 import pytest
+import status
 from asynctest.mock import CoroutineMock
 from aiohttp.client_exceptions import ServerTimeoutError
 from requests.exceptions import (
@@ -14,8 +15,10 @@ from simple_rest_client.decorators import (
     validate_response
 )
 from simple_rest_client.exceptions import (
+    AuthError,
     ClientConnectionError,
     ClientError,
+    NotFoundError,
     ServerError
 )
 from simple_rest_client.models import Response
@@ -33,7 +36,31 @@ def test_validate_response_server_error(status_code):
     assert 'operation=server_error' in str(excinfo.value)
 
 
-@pytest.mark.parametrize('status_code', range(400, 417))
+@pytest.mark.parametrize('status_code', (401, 403))
+def test_validate_response_auth_error(status_code):
+    response = Response(
+        url='http://example.com', method='GET', body=None, headers={},
+        status_code=status_code, client_response=mock.Mock()
+    )
+    with pytest.raises(AuthError) as excinfo:
+        validate_response(response)
+    assert excinfo.value.response.status_code == status_code
+    assert 'operation=auth_error' in str(excinfo.value)
+
+
+def test_validate_response_not_found_error():
+    status_code = status.HTTP_404_NOT_FOUND
+    response = Response(
+        url='http://example.com', method='GET', body=None, headers={},
+        status_code=status_code, client_response=mock.Mock()
+    )
+    with pytest.raises(NotFoundError) as excinfo:
+        validate_response(response)
+    assert excinfo.value.response.status_code == status_code
+    assert 'operation=not_found_error' in str(excinfo.value)
+
+
+@pytest.mark.parametrize('status_code', range(405, 417))
 def test_validate_response_client_error(status_code):
     response = Response(
         url='http://example.com', method='GET', body=None, headers={},

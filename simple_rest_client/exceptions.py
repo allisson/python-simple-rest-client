@@ -20,5 +20,13 @@ class ClientError(ErrorWithResponse):
     pass
 
 
+class AuthError(ClientError):
+    pass
+
+
+class NotFoundError(ClientError):
+    pass
+
+
 class ServerError(ErrorWithResponse):
     pass

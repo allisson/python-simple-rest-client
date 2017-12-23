@@ -1,21 +1,31 @@
-from functools import wraps
 import logging
+from functools import wraps
 
+import status
 from aiohttp.client_exceptions import ServerTimeoutError
 from requests.exceptions import (
     ConnectionError as RequestsConnectionError,
     ReadTimeout,
     Timeout
 )
-import status
 
-from .exceptions import ClientConnectionError, ClientError, ServerError
+from .exceptions import (
+    AuthError,
+    ClientConnectionError,
+    ClientError,
+    NotFoundError,
+    ServerError
+)
 
 logger = logging.getLogger(__name__)
 
 
 def validate_response(response):
     error_suffix = ' response={!r}'.format(response)
+    if response.status_code in (status.HTTP_401_UNAUTHORIZED, status.HTTP_403_FORBIDDEN):
+        raise AuthError('operation=auth_error,' + error_suffix, response)
+    if response.status_code == status.HTTP_404_NOT_FOUND:
+        raise NotFoundError('operation=not_found_error,' + error_suffix, response)
     if status.is_client_error(code=response.status_code):
         raise ClientError('operation=client_error,' + error_suffix, response)
     if status.is_server_error(code=response.status_code):

@@ -1,6 +1,11 @@
 Changelog
 ---------
 
+0.5.0
+~~~~~
+
+* Add new exceptions: AuthError and NotFoundError.
+
 0.4.0
 ~~~~~
 

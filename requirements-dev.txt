@@ -9,3 +9,4 @@ coveralls
 Sphinx
 twine
 wheel
+flake8
