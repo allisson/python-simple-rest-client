@@ -88,7 +88,7 @@ class Resource(BaseResource):
 
     def add_action(self, action_name):
         def action_method(self, *args, body=None, params=None, headers=None,
-                          action_name=action_name):
+                          action_name=action_name, **kwargs):
             url = self.get_action_full_url(action_name, *args)
             method = self.get_action_method(action_name)
             if self.json_encode_body and body:
@@ -99,7 +99,8 @@ class Resource(BaseResource):
                 params=params or {},
                 body=body,
                 headers=headers or {},
-                timeout=self.timeout
+                timeout=self.timeout,
+                kwargs=kwargs
             )
             request.params.update(self.params)
             request.headers.update(self.headers)
@@ -116,7 +117,8 @@ class AsyncResource(BaseResource):
 
     def add_action(self, action_name):
         async def action_method(self, *args, body=None, params=None,
-                                headers=None, action_name=action_name):
+                                headers=None, action_name=action_name,
+                                **kwargs):
             url = self.get_action_full_url(action_name, *args)
             method = self.get_action_method(action_name)
             if self.json_encode_body and body:
@@ -127,7 +129,8 @@ class AsyncResource(BaseResource):
                 params=params or {},
                 body=body,
                 headers=headers or {},
-                timeout=self.timeout
+                timeout=self.timeout,
+                kwargs=kwargs
             )
             request.params.update(self.params)
             request.headers.update(self.headers)

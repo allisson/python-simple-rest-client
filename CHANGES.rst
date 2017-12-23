@@ -1,6 +1,11 @@
 Changelog
 ---------
 
+0.4.0
+~~~~~
+
+* Add request.kwargs support.
+
 0.3.0
 ~~~~~
 
