@@ -25,11 +25,8 @@ from simple_rest_client.models import Response
 
 
 @pytest.mark.parametrize('status_code', range(500, 506))
-def test_validate_response_server_error(status_code):
-    response = Response(
-        url='http://example.com', method='GET', body=None, headers={},
-        status_code=status_code, client_response=mock.Mock()
-    )
+def test_validate_response_server_error(status_code, response_kwargs):
+    response = Response(**response_kwargs, status_code=status_code)
     with pytest.raises(ServerError) as excinfo:
         validate_response(response)
     assert excinfo.value.response.status_code == status_code
@@ -37,23 +34,17 @@ def test_validate_response_server_error(status_code):
 
 
 @pytest.mark.parametrize('status_code', (401, 403))
-def test_validate_response_auth_error(status_code):
-    response = Response(
-        url='http://example.com', method='GET', body=None, headers={},
-        status_code=status_code, client_response=mock.Mock()
-    )
+def test_validate_response_auth_error(status_code, response_kwargs):
+    response = Response(**response_kwargs, status_code=status_code)
     with pytest.raises(AuthError) as excinfo:
         validate_response(response)
     assert excinfo.value.response.status_code == status_code
     assert 'operation=auth_error' in str(excinfo.value)
 
 
-def test_validate_response_not_found_error():
+def test_validate_response_not_found_error(response_kwargs):
     status_code = status.HTTP_404_NOT_FOUND
-    response = Response(
-        url='http://example.com', method='GET', body=None, headers={},
-        status_code=status_code, client_response=mock.Mock()
-    )
+    response = Response(**response_kwargs, status_code=status_code)
     with pytest.raises(NotFoundError) as excinfo:
         validate_response(response)
     assert excinfo.value.response.status_code == status_code
@@ -61,11 +52,8 @@ def test_validate_response_not_found_error():
 
 
 @pytest.mark.parametrize('status_code', range(405, 417))
-def test_validate_response_client_error(status_code):
-    response = Response(
-        url='http://example.com', method='GET', body=None, headers={},
-        status_code=status_code, client_response=mock.Mock()
-    )
+def test_validate_response_client_error(status_code, response_kwargs):
+    response = Response(**response_kwargs, status_code=status_code)
     with pytest.raises(ClientError) as excinfo:
         validate_response(response)
     assert excinfo.value.response.status_code == status_code

@@ -1,4 +1,5 @@
 import pytest
+from unittest import mock
 
 from simple_rest_client.resource import BaseResource, Resource, AsyncResource
 from simple_rest_client.api import API
@@ -82,3 +83,14 @@ def reqres_api(api):
 def reqres_async_api(api):
     api.add_resource(resource_name='users', resource_class=AsyncResource)
     return api
+
+
+@pytest.fixture
+def response_kwargs():
+    return {
+        'url': 'http://example.com',
+        'method': 'GET',
+        'body': None,
+        'headers': {},
+        'client_response': mock.Mock()
+    }
