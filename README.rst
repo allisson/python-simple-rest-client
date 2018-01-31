@@ -22,9 +22,15 @@ Documentation
 
 Check out documentation at `Read the Docs`_ website.
 
+.. _`Read the Docs`: https://python-simple-rest-client.readthedocs.org/
 
-.. _`Read the Docs`: http://python-simple-rest-client.readthedocs.org/
 
+Projects using
+--------------
+
+- `python-vindi`_
+
+.. _`python-vindi`: https://github.com/allisson/python-vindi
 
 .. |TravisCI Build Status| image:: https://travis-ci.org/allisson/python-simple-rest-client.svg?branch=master
    :target: https://travis-ci.org/allisson/python-simple-rest-client
