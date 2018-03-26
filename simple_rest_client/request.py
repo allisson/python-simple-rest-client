@@ -47,7 +47,7 @@ def make_request(session, request):
 
 @handle_async_request_error
 async def make_async_request(session, request):
-    logger.info('operation=request_started, request=%r', request)
+    logger.debug('operation=request_started, request=%r', request)
     method = request.method
     with async_timeout.timeout(request.timeout):
         session_method = getattr(session, method.lower())
