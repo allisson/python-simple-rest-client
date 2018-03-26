@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 
 @handle_request_error
 def make_request(session, request):
-    logger.debug('operation=request_started, request={!r}'.format(request))
+    logger.debug('operation=request_started, request=%r', request)
     method = request.method
     session_method = getattr(session, method.lower())
     client_response = session_method(
@@ -39,16 +39,15 @@ def make_request(session, request):
         client_response=client_response
     )
     logger.debug(
-        'operation=request_finished, request={!r}, response={!r}'.format(
-            request, response
-        )
+        'operation=request_finished, request=%r, response=%r',
+        request, response
     )
     return response
 
 
 @handle_async_request_error
 async def make_async_request(session, request):
-    logger.info('operation=request_started, request={!r}'.format(request))
+    logger.info('operation=request_started, request=%r', request)
     method = request.method
     with async_timeout.timeout(request.timeout):
         session_method = getattr(session, method.lower())
@@ -71,9 +70,8 @@ async def make_async_request(session, request):
                 status_code=client_response.status,
                 client_response=client_response
             )
-            logger.info(
-                'operation=request_finished, request={!r}, response={!r}'.format(
-                    request, response
-                )
+            logger.debug(
+                'operation=request_finished, request=%r, response=%r',
+                request, response
             )
             return response
