@@ -1,6 +1,11 @@
 Changelog
 ---------
 
+0.5.1
+~~~~~
+
+* Change log level for async requests (thanks @kwarunek).
+
 0.5.0
 ~~~~~
 
