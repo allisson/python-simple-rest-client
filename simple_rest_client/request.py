@@ -26,7 +26,10 @@ def make_request(session, request):
     if 'text' in content_type:
         body = client_response.text
     elif 'json' in content_type:
-        body = json.loads(client_response.text)
+        if client_response.text:
+            body = json.loads(client_response.text)
+        else:
+            body = client_response.content
     else:
         body = client_response.content
 
