@@ -1,6 +1,11 @@
 Changelog
 ---------
 
+0.5.2
+~~~~~
+
+* Fix JSONDecodeError when processing empty server responses (thanks @zmbbb).
+
 0.5.1
 ~~~~~
 

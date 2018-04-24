@@ -83,24 +83,25 @@ def test_resource_actions(url, method, status, action, args, kwargs, reqres_reso
     assert response.body == {'success': True}
 
 
-@pytest.mark.parametrize('content_type,response_body', [
-    ('application/json', {'success': True}),
-    ('text/plain', '{"success": true}'),
-    ('application/octet-stream', b'{"success": true}'),
+@pytest.mark.parametrize('content_type,response_body,expected_response_body', [
+    ('application/json', '{"success": true}', {'success': True}),
+    ('application/json', '', ''),
+    ('text/plain', '{"success": true}', '{"success": true}'),
+    ('application/octet-stream', '{"success": true}', b'{"success": true}'),
 ])
 @responses.activate
-def test_resource_response_body(content_type, response_body, reqres_resource):
+def test_resource_response_body(content_type, response_body, expected_response_body, reqres_resource):
     url = 'https://reqres.in/api/users'
     responses.add(
         responses.GET,
         url,
-        body=b'{"success": true}',
+        body=response_body,
         status=200,
         content_type=content_type
     )
 
     response = reqres_resource.list()
-    assert response.body == response_body
+    assert response.body == expected_response_body
 
 
 @pytest.mark.asyncio
@@ -124,14 +125,15 @@ async def test_async_resource_actions(url, method, status, action, args, kwargs,
 
 
 @pytest.mark.asyncio
-@pytest.mark.parametrize('content_type,response_body', [
-    ('application/json', {'success': True}),
-    ('text/plain', '{"success": true}'),
-    ('application/octet-stream', b'{"success": true}'),
+@pytest.mark.parametrize('content_type,response_body,expected_response_body', [
+    ('application/json', '{"success": true}', {'success': True}),
+    ('application/json', '', ''),
+    ('text/plain', '{"success": true}', '{"success": true}'),
+    ('application/octet-stream', '{"success": true}', b'{"success": true}'),
 ])
-async def test_asyncresource_response_body(content_type, response_body, reqres_async_resource):
+async def test_asyncresource_response_body(content_type, response_body, expected_response_body, reqres_async_resource):
     url = 'https://reqres.in/api/users'
     with aioresponses() as mock_response:
-        mock_response.get(url, status=200, body=b'{"success": true}', headers={'Content-Type': content_type})
+        mock_response.get(url, status=200, body=response_body, headers={'Content-Type': content_type})
         response = await reqres_async_resource.list()
-    assert response.body == response_body
+    assert response.body == expected_response_body

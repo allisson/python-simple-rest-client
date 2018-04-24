@@ -3,7 +3,7 @@ import logging
 import async_timeout
 from json_encoder import json
 
-from .decorators import handle_request_error, handle_async_request_error
+from .decorators import handle_async_request_error, handle_request_error
 from .models import Response
 
 logger = logging.getLogger(__name__)
@@ -26,7 +26,9 @@ def make_request(session, request):
     if 'text' in content_type:
         body = client_response.text
     elif 'json' in content_type:
-        body = json.loads(client_response.text)
+        body = client_response.text
+        if body:
+            body = json.loads(body)
     else:
         body = client_response.content
 
@@ -58,7 +60,9 @@ async def make_async_request(session, request):
             if 'text' in content_type:
                 body = await client_response.text()
             elif 'json' in content_type:
-                body = json.loads(await client_response.text())
+                body = await client_response.text()
+                if body:
+                    body = json.loads(body)
             else:
                 body = await client_response.read()
 
