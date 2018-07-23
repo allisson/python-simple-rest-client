@@ -1,6 +1,11 @@
 Changelog
 ---------
 
+0.5.3
+~~~~~
+
+* Fix api_root_url without trailing slash (thanks @dspechnikov).
+
 0.5.2
 ~~~~~
 

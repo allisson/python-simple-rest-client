@@ -72,7 +72,9 @@ class BaseResource:
 
         if self.append_slash and not url.endswith('/'):
             url += '/'
-        return urljoin(self.api_root_url, url)
+        if not self.api_root_url.endswith('/'):
+            self.api_root_url += '/'
+        return self.api_root_url + url
 
     def get_action_method(self, action_name):
         action = self.get_action(action_name)
