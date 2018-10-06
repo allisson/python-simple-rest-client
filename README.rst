@@ -29,8 +29,10 @@ Projects using
 --------------
 
 - `python-vindi`_
+- `sentry-patrol`_
 
 .. _`python-vindi`: https://github.com/allisson/python-vindi
+.. _`sentry-patrol`: https://github.com/daneoshiga/sentry-patrol
 
 .. |TravisCI Build Status| image:: https://travis-ci.org/allisson/python-simple-rest-client.svg?branch=master
    :target: https://travis-ci.org/allisson/python-simple-rest-client
