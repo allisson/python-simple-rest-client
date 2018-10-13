@@ -2,24 +2,18 @@ from unittest import mock
 
 import pytest
 import status
-from asynctest.mock import CoroutineMock
 from aiohttp.client_exceptions import ServerTimeoutError
-from requests.exceptions import (
-    Timeout,
-    ConnectionError as RequestsConnectionError
-)
+from asynctest.mock import CoroutineMock
+from requests.exceptions import ConnectionError as RequestsConnectionError
+from requests.exceptions import Timeout
 
-from simple_rest_client.decorators import (
-    handle_async_request_error,
-    handle_request_error,
-    validate_response
-)
+from simple_rest_client.decorators import handle_async_request_error, handle_request_error, validate_response
 from simple_rest_client.exceptions import (
     AuthError,
     ClientConnectionError,
     ClientError,
     NotFoundError,
-    ServerError
+    ServerError,
 )
 from simple_rest_client.models import Response
 

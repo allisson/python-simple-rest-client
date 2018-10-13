@@ -1,6 +1,5 @@
 import logging
 from types import MethodType
-from urllib.parse import urljoin
 
 import aiohttp
 import requests
@@ -8,7 +7,7 @@ from json_encoder import json
 
 from .exceptions import ActionNotFound, ActionURLMatchError
 from .models import Request
-from .request import make_request, make_async_request
+from .request import make_async_request, make_request
 
 logger = logging.getLogger(__name__)
 

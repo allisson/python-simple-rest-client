@@ -1,8 +1,9 @@
-import pytest
 from unittest import mock
 
-from simple_rest_client.resource import BaseResource, Resource, AsyncResource
+import pytest
+
 from simple_rest_client.api import API
+from simple_rest_client.resource import AsyncResource, BaseResource, Resource
 
 
 @pytest.fixture

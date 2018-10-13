@@ -3,19 +3,10 @@ from functools import wraps
 
 import status
 from aiohttp.client_exceptions import ServerTimeoutError
-from requests.exceptions import (
-    ConnectionError as RequestsConnectionError,
-    ReadTimeout,
-    Timeout
-)
+from requests.exceptions import ConnectionError as RequestsConnectionError
+from requests.exceptions import ReadTimeout, Timeout
 
-from .exceptions import (
-    AuthError,
-    ClientConnectionError,
-    ClientError,
-    NotFoundError,
-    ServerError
-)
+from .exceptions import AuthError, ClientConnectionError, ClientError, NotFoundError, ServerError
 
 logger = logging.getLogger(__name__)
 

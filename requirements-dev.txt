@@ -1,12 +1,13 @@
 -r requirements.txt
+Sphinx
 aioresponses
 asynctest
 codecov
 flake8
+isort
 pytest
 pytest-asyncio
 pytest-cov
 responses
-Sphinx
 twine
 wheel
