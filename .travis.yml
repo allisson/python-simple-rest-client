@@ -1,3 +1,5 @@
+dist: xenial
+sudo: yes
 language: python
 python:
   - "3.5"
