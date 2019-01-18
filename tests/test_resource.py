@@ -40,6 +40,22 @@ def test_base_resource_get_action_full_url_api_root_url_without_trailing_slash(b
     assert resource.get_action_full_url('destroy', 1) == 'http://example.com/v1/users/1'
 
 
+def test_base_resource_get_action_full_url_api_root_url_prevent_double_slash(base_resource):
+    resource = base_resource(api_root_url='http://example.com/v1', resource_name='users')
+    resource.actions = {
+        'list': {
+            'method': 'GET',
+            'url': '/users'
+        },
+        'retrieve': {
+            'method': 'GET',
+            'url': '/users/{}',
+        },
+    }
+    assert resource.get_action_full_url('list') == 'http://example.com/v1/users'
+    assert resource.get_action_full_url('retrieve', 1) == 'http://example.com/v1/users/1'
+
+
 def test_base_resource_get_action_full_url_with_action_not_found(base_resource):
     resource = base_resource(api_root_url='http://example.com', resource_name='users')
     with pytest.raises(ActionNotFound) as execinfo:

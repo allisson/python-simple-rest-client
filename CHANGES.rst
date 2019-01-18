@@ -1,6 +1,11 @@
 Changelog
 ---------
 
+0.5.4
+~~~~~
+
+* Prevent urls with double slashes.
+
 0.5.3
 ~~~~~
 
