@@ -73,6 +73,8 @@ class BaseResource:
             url += '/'
         if not self.api_root_url.endswith('/'):
             self.api_root_url += '/'
+        if url.startswith('/'):
+            url = url.replace('/', '', 1)
         return self.api_root_url + url
 
     def get_action_method(self, action_name):
