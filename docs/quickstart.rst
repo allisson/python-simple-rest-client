@@ -126,4 +126,19 @@ Now, building a client for github events resource (https://developer.github.com/
     >>> response.method
     'GET'
 
+Create API without certificate validation
+
+    >>> # import API
+    >>> from simple_rest_client.api import API
+    >>> # create api instance
+    >>> api = API(
+    ...     api_root_url='https://develop-environment-with-self-signed-certificate.in/api/', # base api url
+    ...     params={}, # default params
+    ...     headers={}, # default headers
+    ...     timeout=2, # default timeout in seconds
+    ...     append_slash=False, # append slash to final url
+    ...     json_encode_body=True, # encode body as json
+    ...     verify = False
+    ... )
+    
 Check `https://github.com/allisson/python-simple-rest-client/tree/master/examples <https://github.com/allisson/python-simple-rest-client/tree/master/examples>`_ for more code examples.
