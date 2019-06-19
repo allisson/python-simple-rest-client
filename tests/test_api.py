@@ -10,7 +10,7 @@ def test_api_add_resource(api, reqres_resource):
     assert isinstance(api.users, Resource)
     attrs = (
         'api_root_url', 'resource_name', 'headers', 'actions', 'timeout',
-        'append_slash', 'json_encode_body'
+        'append_slash', 'json_encode_body', 'verify'
     )
     for attr in attrs:
         assert getattr(api.users, attr) == getattr(reqres_resource, attr)
