@@ -2,7 +2,7 @@
 Sphinx
 aioresponses
 asynctest
-black==19.3b0
+black
 codecov
 flake8
 isort
