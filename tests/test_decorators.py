@@ -18,22 +18,22 @@ from simple_rest_client.exceptions import (
 from simple_rest_client.models import Response
 
 
-@pytest.mark.parametrize('status_code', range(500, 506))
+@pytest.mark.parametrize("status_code", range(500, 506))
 def test_validate_response_server_error(status_code, response_kwargs):
     response = Response(**response_kwargs, status_code=status_code)
     with pytest.raises(ServerError) as excinfo:
         validate_response(response)
     assert excinfo.value.response.status_code == status_code
-    assert 'operation=server_error' in str(excinfo.value)
+    assert "operation=server_error" in str(excinfo.value)
 
 
-@pytest.mark.parametrize('status_code', (401, 403))
+@pytest.mark.parametrize("status_code", (401, 403))
 def test_validate_response_auth_error(status_code, response_kwargs):
     response = Response(**response_kwargs, status_code=status_code)
     with pytest.raises(AuthError) as excinfo:
         validate_response(response)
     assert excinfo.value.response.status_code == status_code
-    assert 'operation=auth_error' in str(excinfo.value)
+    assert "operation=auth_error" in str(excinfo.value)
 
 
 def test_validate_response_not_found_error(response_kwargs):
@@ -42,19 +42,19 @@ def test_validate_response_not_found_error(response_kwargs):
     with pytest.raises(NotFoundError) as excinfo:
         validate_response(response)
     assert excinfo.value.response.status_code == status_code
-    assert 'operation=not_found_error' in str(excinfo.value)
+    assert "operation=not_found_error" in str(excinfo.value)
 
 
-@pytest.mark.parametrize('status_code', range(405, 417))
+@pytest.mark.parametrize("status_code", range(405, 417))
 def test_validate_response_client_error(status_code, response_kwargs):
     response = Response(**response_kwargs, status_code=status_code)
     with pytest.raises(ClientError) as excinfo:
         validate_response(response)
     assert excinfo.value.response.status_code == status_code
-    assert 'operation=client_error' in str(excinfo.value)
+    assert "operation=client_error" in str(excinfo.value)
 
 
-@pytest.mark.parametrize('side_effect', (Timeout, RequestsConnectionError))
+@pytest.mark.parametrize("side_effect", (Timeout, RequestsConnectionError))
 def test_handle_request_error_exceptions(side_effect):
     wrapped = mock.Mock(side_effect=side_effect)
     with pytest.raises(ClientConnectionError):

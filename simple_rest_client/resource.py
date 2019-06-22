@@ -15,9 +15,17 @@ logger = logging.getLogger(__name__)
 class BaseResource:
     actions = {}
 
-    def __init__(self, api_root_url=None, resource_name=None, params=None,
-                 headers=None, timeout=None, append_slash=False,
-                 json_encode_body=False, verify=None):
+    def __init__(
+        self,
+        api_root_url=None,
+        resource_name=None,
+        params=None,
+        headers=None,
+        timeout=None,
+        append_slash=False,
+        json_encode_body=False,
+        verify=None,
+    ):
         self.api_root_url = api_root_url
         self.resource_name = resource_name
         self.params = params or {}
@@ -34,30 +42,12 @@ class BaseResource:
     @property
     def default_actions(self):
         return {
-            'list': {
-                'method': 'GET',
-                'url': self.resource_name
-            },
-            'create': {
-                'method': 'POST',
-                'url': self.resource_name
-            },
-            'retrieve': {
-                'method': 'GET',
-                'url': self.resource_name + '/{}',
-            },
-            'update': {
-                'method': 'PUT',
-                'url': self.resource_name + '/{}',
-            },
-            'partial_update': {
-                'method': 'PATCH',
-                'url': self.resource_name + '/{}',
-            },
-            'destroy': {
-                'method': 'DELETE',
-                'url': self.resource_name + '/{}',
-            },
+            "list": {"method": "GET", "url": self.resource_name},
+            "create": {"method": "POST", "url": self.resource_name},
+            "retrieve": {"method": "GET", "url": self.resource_name + "/{}"},
+            "update": {"method": "PUT", "url": self.resource_name + "/{}"},
+            "partial_update": {"method": "PATCH", "url": self.resource_name + "/{}"},
+            "destroy": {"method": "DELETE", "url": self.resource_name + "/{}"},
         }
 
     def get_action(self, action_name):
@@ -69,21 +59,21 @@ class BaseResource:
     def get_action_full_url(self, action_name, *parts):
         action = self.get_action(action_name)
         try:
-            url = action['url'].format(*parts)
+            url = action["url"].format(*parts)
         except IndexError:
             raise ActionURLMatchError('No url match for "{}"'.format(action_name))
 
-        if self.append_slash and not url.endswith('/'):
-            url += '/'
-        if not self.api_root_url.endswith('/'):
-            self.api_root_url += '/'
-        if url.startswith('/'):
-            url = url.replace('/', '', 1)
+        if self.append_slash and not url.endswith("/"):
+            url += "/"
+        if not self.api_root_url.endswith("/"):
+            self.api_root_url += "/"
+        if url.startswith("/"):
+            url = url.replace("/", "", 1)
         return self.api_root_url + url
 
     def get_action_method(self, action_name):
         action = self.get_action(action_name)
-        return action['method']
+        return action["method"]
 
 
 class Resource(BaseResource):
@@ -94,8 +84,9 @@ class Resource(BaseResource):
             self.add_action(action_name)
 
     def add_action(self, action_name):
-        def action_method(self, *args, body=None, params=None, headers=None,
-                          action_name=action_name, **kwargs):
+        def action_method(
+            self, *args, body=None, params=None, headers=None, action_name=action_name, **kwargs
+        ):
             url = self.get_action_full_url(action_name, *args)
             method = self.get_action_method(action_name)
             if self.json_encode_body and body:
@@ -108,7 +99,7 @@ class Resource(BaseResource):
                 headers=headers or {},
                 timeout=self.timeout,
                 verify=self.verify,
-                kwargs=kwargs
+                kwargs=kwargs,
             )
             request.params.update(self.params)
             request.headers.update(self.headers)
@@ -124,9 +115,9 @@ class AsyncResource(BaseResource):
             self.add_action(action_name)
 
     def add_action(self, action_name):
-        async def action_method(self, *args, body=None, params=None,
-                                headers=None, action_name=action_name,
-                                **kwargs):
+        async def action_method(
+            self, *args, body=None, params=None, headers=None, action_name=action_name, **kwargs
+        ):
             url = self.get_action_full_url(action_name, *args)
             method = self.get_action_method(action_name)
             if self.json_encode_body and body:
@@ -139,7 +130,7 @@ class AsyncResource(BaseResource):
                 headers=headers or {},
                 timeout=self.timeout,
                 verify=self.verify,
-                kwargs=kwargs
+                kwargs=kwargs,
             )
             request.params.update(self.params)
             request.headers.update(self.headers)
