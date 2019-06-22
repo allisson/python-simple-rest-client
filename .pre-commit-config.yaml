@@ -1,25 +1,4 @@
 repos:
-- repo: git@github.com:pre-commit/pre-commit-hooks
-  rev: v2.2.3
-  hooks:
-  - id: debug-statements
-  - id: trailing-whitespace
-  - id: check-merge-conflict
-  - id: check-executables-have-shebangs
-  - id: check-ast
-  - id: check-byte-order-marker
-  - id: check-json
-  - id: check-symlinks
-  - id: check-vcs-permalinks
-  - id: check-xml
-  - id: check-yaml
-  - id: detect-aws-credentials
-    args: ['--allow-missing-credentials']
-  - id: detect-private-key
-  - id: forbid-new-submodules
-  - id: flake8
-    args: ['--ignore=E501,W503']
-
 - repo: local
   hooks:
   - id: black
@@ -34,3 +13,9 @@ repos:
     language: system
     types: [python]
     args: ['--check-only']
+  - id: flake8
+    name: flake8
+    entry: flake8
+    language: system
+    types: [python]
+    args: ['--ignore=E501,W503']
