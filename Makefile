@@ -26,3 +26,6 @@ release: dist
 	git tag `python setup.py -q version`
 	git push origin `python setup.py -q version`
 	twine upload dist/*
+
+lint:
+	SKIP=no-commit-to-branch pre-commit run -a -v

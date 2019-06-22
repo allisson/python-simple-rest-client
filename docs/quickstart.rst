@@ -2,7 +2,7 @@ Quickstart
 ==========
 
 Let's start building a client for users resource in https://reqres.in/ service::
-    
+
     >>> # import API
     >>> from simple_rest_client.api import API
     >>> # create api instance
@@ -18,7 +18,7 @@ Let's start building a client for users resource in https://reqres.in/ service::
     >>> api.add_resource(resource_name='users')
     >>> # show resource actions
     >>> api.users.actions
-    {'list': {'method': 'GET', 'url': 'users'}, 'create': {'method': 'POST', 'url': 'users'}, 'retrieve': {'method': 'GET', 'url': 'users/{}'}, 'update': {'method': 'PUT', 'url': 'users/{}'}, 'partial_update': {'method': 'PATCH', 'url': 'users/{}'}, 'destroy': {'method': 'DELETE', 'url': 'users/{}'}} 
+    {'list': {'method': 'GET', 'url': 'users'}, 'create': {'method': 'POST', 'url': 'users'}, 'retrieve': {'method': 'GET', 'url': 'users/{}'}, 'update': {'method': 'PUT', 'url': 'users/{}'}, 'partial_update': {'method': 'PATCH', 'url': 'users/{}'}, 'destroy': {'method': 'DELETE', 'url': 'users/{}'}}
     >>> # list action
     >>> response = api.users.list(body=None, params={}, headers={})
     >>> response.url
@@ -57,7 +57,7 @@ Let's start building a client for users resource in https://reqres.in/ service::
     204
 
 Building async client for users resource in https://reqres.in/ service::
-    
+
     >>> # import asyncio, API and AsyncResource
     >>> import asyncio
     >>> from simple_rest_client.api import API
@@ -75,7 +75,7 @@ Building async client for users resource in https://reqres.in/ service::
     >>> api.add_resource(resource_name='users', resource_class=AsyncResource)
     >>> async def main():
     ...     print(await api.users.list())
-    ... 
+    ...
     >>> loop = asyncio.get_event_loop()
     >>> loop.run_until_complete(main())
     Response(url='https://reqres.in/api/users', method='GET', body={'page': 1, 'per_page': 3, 'total': 12, 'total_pages': 4, 'data': [{'id': 1, 'first_name': 'george', 'last_name': 'bluth', 'avatar': 'https://s3.amazonaws.com/uifaces/faces/twitter/calebogden/128.jpg'}, {'id': 2, 'first_name': 'lucille', 'last_name': 'bluth', 'avatar': 'https://s3.amazonaws.com/uifaces/faces/twitter/josephstein/128.jpg'}, {'id': 3, 'first_name': 'oscar', 'last_name': 'bluth', 'avatar': 'https://s3.amazonaws.com/uifaces/faces/twitter/olegpogodaev/128.jpg'}]}, headers={'Date': 'Mon, 26 Jun 2017 19:03:04 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Set-Cookie': '__cfduid=d0412e4ebb0c5c29b09c0f756408d6ccb1498503784; expires=Tue, 26-Jun-18 19:03:04 GMT; path=/; domain=.reqres.in; HttpOnly', 'X-Powered-By': 'Express', 'Access-Control-Allow-Origin': '*', 'ETag': 'W/"1be-q96WkDv6JqfLvIPiRhzWJQ"', 'Server': 'cloudflare-nginx', 'CF-RAY': '37526caddd214af1-GRU', 'Content-Encoding': 'gzip'}, status_code=200)
@@ -100,7 +100,7 @@ Now, building a client for github events resource (https://developer.github.com/
     ...         'public_user_events': {'method': 'GET', 'url': '/users/{}/events/public'},
     ...         'organization_events': {'method': 'GET', 'url': '/users/{}/events/orgs/{}'},
     ... }
-    ... 
+    ...
     >>> # set default params
     >>> default_params = {'access_token': 'valid-token'}
     >>> # create api instance
@@ -140,5 +140,5 @@ Create API without certificate validation
     ...     json_encode_body=True, # encode body as json
     ...     verify = False
     ... )
-    
+
 Check `https://github.com/allisson/python-simple-rest-client/tree/master/examples <https://github.com/allisson/python-simple-rest-client/tree/master/examples>`_ for more code examples.

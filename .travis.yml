@@ -2,13 +2,13 @@ dist: xenial
 sudo: yes
 language: python
 python:
-  - "3.5"
   - "3.6"
   - "3.7"
-# command to install dependencies
 install:
+  - pip install pip -U
   - pip install -r requirements-dev.txt
-# command to run tests
+before_script:
+  - make lint
 script:
   pytest
 after_success:

@@ -2,9 +2,11 @@
 Sphinx
 aioresponses
 asynctest
+black
 codecov
 flake8
 isort
+pre-commit
 pytest
 pytest-asyncio
 pytest-cov

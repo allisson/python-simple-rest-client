@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 
 @handle_request_error
 def make_request(session, request):
-    logger.debug('operation=request_started, request=%r', request)
+    logger.debug("operation=request_started, request=%r", request)
     method = request.method
     session_method = getattr(session, method.lower())
     client_response = session_method(
@@ -21,12 +21,12 @@ def make_request(session, request):
         headers=request.headers,
         timeout=request.timeout,
         verify=request.verify,
-        **request.kwargs
+        **request.kwargs,
     )
-    content_type = client_response.headers.get('Content-Type', '')
-    if 'text' in content_type:
+    content_type = client_response.headers.get("Content-Type", "")
+    if "text" in content_type:
         body = client_response.text
-    elif 'json' in content_type:
+    elif "json" in content_type:
         body = client_response.text
         if body:
             body = json.loads(body)
@@ -39,28 +39,25 @@ def make_request(session, request):
         body=body,
         headers=client_response.headers,
         status_code=client_response.status_code,
-        client_response=client_response
+        client_response=client_response,
     )
-    logger.debug(
-        'operation=request_finished, request=%r, response=%r',
-        request, response
-    )
+    logger.debug("operation=request_finished, request=%r, response=%r", request, response)
     return response
 
 
 @handle_async_request_error
 async def make_async_request(session, request):
-    logger.debug('operation=request_started, request=%r', request)
+    logger.debug("operation=request_started, request=%r", request)
     method = request.method
     with async_timeout.timeout(request.timeout):
         session_method = getattr(session, method.lower())
         async with session_method(
-                request.url, params=request.params, data=request.body,
-                headers=request.headers, **request.kwargs) as client_response:
-            content_type = client_response.headers.get('Content-Type', '')
-            if 'text' in content_type:
+            request.url, params=request.params, data=request.body, headers=request.headers, **request.kwargs
+        ) as client_response:
+            content_type = client_response.headers.get("Content-Type", "")
+            if "text" in content_type:
                 body = await client_response.text()
-            elif 'json' in content_type:
+            elif "json" in content_type:
                 body = await client_response.text()
                 if body:
                     body = json.loads(body)
@@ -73,10 +70,7 @@ async def make_async_request(session, request):
                 body=body,
                 headers=dict(client_response.headers),
                 status_code=client_response.status,
-                client_response=client_response
+                client_response=client_response,
             )
-            logger.debug(
-                'operation=request_finished, request=%r, response=%r',
-                request, response
-            )
+            logger.debug("operation=request_finished, request=%r, response=%r", request, response)
             return response
