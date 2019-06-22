@@ -20,7 +20,7 @@ def make_request(session, request):
         data=request.body,
         headers=request.headers,
         timeout=request.timeout,
-        verify=request.verify,
+        verify=request.ssl_verify,
         **request.kwargs,
     )
     content_type = client_response.headers.get("Content-Type", "")
@@ -52,7 +52,12 @@ async def make_async_request(session, request):
     with async_timeout.timeout(request.timeout):
         session_method = getattr(session, method.lower())
         async with session_method(
-            request.url, params=request.params, data=request.body, headers=request.headers, **request.kwargs
+            request.url,
+            params=request.params,
+            data=request.body,
+            headers=request.headers,
+            ssl=request.ssl_verify,
+            **request.kwargs,
         ) as client_response:
             content_type = client_response.headers.get("Content-Type", "")
             if "text" in content_type:

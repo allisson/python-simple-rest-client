@@ -2,21 +2,29 @@ import pytest
 import responses
 from aioresponses import aioresponses
 
+from simple_rest_client.api import API
 from simple_rest_client.resource import Resource
+
+
+@pytest.mark.parametrize("ssl_verify,expected_ssl_verify", [(None, True), (True, True), (False, False)])
+def test_api_ssl_verify(ssl_verify, expected_ssl_verify, api, reqres_resource):
+    api = API(api_root_url="https://reqres.in/api/", json_encode_body=True, ssl_verify=ssl_verify)
+    api.add_resource(resource_name="users")
+    assert api.ssl_verify == expected_ssl_verify
 
 
 def test_api_add_resource(api, reqres_resource):
     api.add_resource(resource_name="users")
     assert isinstance(api.users, Resource)
     attrs = (
-        "api_root_url",
-        "resource_name",
-        "headers",
         "actions",
-        "timeout",
+        "api_root_url",
         "append_slash",
+        "headers",
         "json_encode_body",
-        "verify",
+        "resource_name",
+        "ssl_verify",
+        "timeout",
     )
     for attr in attrs:
         assert getattr(api.users, attr) == getattr(reqres_resource, attr)
