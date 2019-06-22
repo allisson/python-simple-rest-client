@@ -20,6 +20,7 @@ def make_request(session, request):
         data=request.body,
         headers=request.headers,
         timeout=request.timeout,
+        verify=request.verify,
         **request.kwargs
     )
     content_type = client_response.headers.get('Content-Type', '')

@@ -17,7 +17,7 @@ class BaseResource:
 
     def __init__(self, api_root_url=None, resource_name=None, params=None,
                  headers=None, timeout=None, append_slash=False,
-                 json_encode_body=False):
+                 json_encode_body=False, verify=None):
         self.api_root_url = api_root_url
         self.resource_name = resource_name
         self.params = params or {}
@@ -26,6 +26,10 @@ class BaseResource:
         self.append_slash = append_slash
         self.json_encode_body = json_encode_body
         self.actions = self.actions or self.default_actions
+        if verify is None:
+            self.verify = True
+        else:
+            self.verify = verify
 
     @property
     def default_actions(self):
@@ -103,6 +107,7 @@ class Resource(BaseResource):
                 body=body,
                 headers=headers or {},
                 timeout=self.timeout,
+                verify=self.verify,
                 kwargs=kwargs
             )
             request.params.update(self.params)
@@ -133,6 +138,7 @@ class AsyncResource(BaseResource):
                 body=body,
                 headers=headers or {},
                 timeout=self.timeout,
+                verify=self.verify,
                 kwargs=kwargs
             )
             request.params.update(self.params)
