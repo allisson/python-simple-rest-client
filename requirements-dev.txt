@@ -2,6 +2,7 @@
 Sphinx
 aioresponses
 asynctest
+black
 codecov
 flake8
 isort
