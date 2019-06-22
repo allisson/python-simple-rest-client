@@ -138,7 +138,7 @@ Create API without certificate validation
     ...     timeout=2, # default timeout in seconds
     ...     append_slash=False, # append slash to final url
     ...     json_encode_body=True, # encode body as json
-    ...     verify = False
+    ...     ssl_verify=False # ignore verifying the ssl
     ... )
 
 Check `https://github.com/allisson/python-simple-rest-client/tree/master/examples <https://github.com/allisson/python-simple-rest-client/tree/master/examples>`_ for more code examples.

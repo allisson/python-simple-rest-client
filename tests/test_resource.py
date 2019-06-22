@@ -5,6 +5,12 @@ from aioresponses import aioresponses
 from simple_rest_client.exceptions import ActionNotFound, ActionURLMatchError
 
 
+@pytest.mark.parametrize("ssl_verify,expected_ssl_verify", [(None, True), (True, True), (False, False)])
+def test_base_resource_ssl_verify(ssl_verify, expected_ssl_verify, base_resource):
+    resource = base_resource(api_root_url="http://example.com", resource_name="users", ssl_verify=ssl_verify)
+    assert resource.ssl_verify == expected_ssl_verify
+
+
 def test_base_resource_actions(base_resource):
     resource = base_resource(api_root_url="http://example.com", resource_name="users")
     assert resource.actions == resource.default_actions

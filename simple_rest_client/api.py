@@ -10,7 +10,7 @@ class API:
         timeout=None,
         append_slash=False,
         json_encode_body=False,
-        verify=None,
+        ssl_verify=None,
     ):
         self.api_root_url = api_root_url
         self.params = params or {}
@@ -18,10 +18,7 @@ class API:
         self.timeout = timeout
         self.append_slash = append_slash
         self.json_encode_body = json_encode_body
-        if verify is None:
-            self.verify = True
-        else:
-            self.verify = verify
+        self.ssl_verify = True if ssl_verify is None else ssl_verify
         self._resources = {}
 
     def add_resource(
@@ -44,7 +41,7 @@ class API:
             timeout=timeout or self.timeout,
             append_slash=append_slash or self.append_slash,
             json_encode_body=json_encode_body or self.json_encode_body,
-            verify=self.verify,
+            ssl_verify=self.ssl_verify,
         )
         self._resources[resource_name] = resource
         setattr(self, resource_name, resource)
