@@ -25,8 +25,6 @@ def test_api_add_resource(api, reqres_resource):
         "timeout",
     )
     for attr in attrs:
-        print(getattr(api.users, attr))
-        print(getattr(reqres_resource, attr))
         assert getattr(api.users, attr) == getattr(reqres_resource, attr)
     assert "users" in api._resources
 
