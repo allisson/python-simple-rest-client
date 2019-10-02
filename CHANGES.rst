@@ -1,6 +1,11 @@
 Changelog
 ---------
 
+1.0.0
+~~~~~
+
+* Major release, use httpx instead of aiohttp and requests.
+
 0.6.0
 ~~~~~
 

@@ -1,7 +1,5 @@
 import asyncio
 
-from aiohttp import BasicAuth
-
 from simple_rest_client.api import API
 from simple_rest_client.resource import AsyncResource
 
@@ -11,7 +9,7 @@ class BasicAuthResource(AsyncResource):
 
 
 # https://httpbin.org/
-auth = BasicAuth("username", password="password")
+auth = ("username", "password")
 httpbin_api = API(api_root_url="https://httpbin.org/")
 httpbin_api.add_resource(resource_name="basic_auth", resource_class=BasicAuthResource)
 
