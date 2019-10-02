@@ -4,7 +4,9 @@ Changelog
 1.0.0
 ~~~~~
 
-* Major release, use httpx instead of aiohttp and requests.
+* Major release.
+* Use httpx instead of aiohttp and requests.
+* Drop python 3.5.
 
 0.6.0
 ~~~~~
