@@ -4,6 +4,14 @@ from simple_rest_client.api import API
 from simple_rest_client.resource import Resource
 
 
+def test_api_headers():
+    api = API(api_root_url="http://localhost:0/api/")
+    assert api.headers == {}
+
+    json_api = API(api_root_url="http://localhost:0/api/", json_encode_body=True)
+    assert json_api.headers == {"Content-Type": "application/json"}
+
+
 @pytest.mark.parametrize("ssl_verify,expected_ssl_verify", [(None, True), (True, True), (False, False)])
 def test_api_ssl_verify(ssl_verify, expected_ssl_verify, api, reqres_resource):
     api = API(api_root_url="http://localhost:0/api/", json_encode_body=True, ssl_verify=ssl_verify)

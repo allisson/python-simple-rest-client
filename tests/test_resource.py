@@ -3,6 +3,16 @@ import pytest
 from simple_rest_client.exceptions import ActionNotFound, ActionURLMatchError
 
 
+def test_base_resource_headers(base_resource):
+    resource = base_resource(api_root_url="http://example.com", resource_name="users")
+    assert resource.headers == {}
+
+    json_resource = base_resource(
+        api_root_url="http://example.com", resource_name="users", json_encode_body=True
+    )
+    assert json_resource.headers == {"Content-Type": "application/json"}
+
+
 @pytest.mark.parametrize("ssl_verify,expected_ssl_verify", [(None, True), (True, True), (False, False)])
 def test_base_resource_ssl_verify(ssl_verify, expected_ssl_verify, base_resource):
     resource = base_resource(api_root_url="http://example.com", resource_name="users", ssl_verify=ssl_verify)
