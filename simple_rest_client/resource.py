@@ -1,9 +1,7 @@
 import logging
 from types import MethodType
 
-import aiohttp
-import requests
-from json_encoder import json
+import httpx
 
 from .exceptions import ActionNotFound, ActionURLMatchError
 from .models import Request
@@ -35,6 +33,9 @@ class BaseResource:
         self.json_encode_body = json_encode_body
         self.actions = self.actions or self.default_actions
         self.ssl_verify = True if ssl_verify is None else ssl_verify
+
+        if self.json_encode_body:
+            self.headers["Content-Type"] = "application/json"
 
     @property
     def default_actions(self):
@@ -76,7 +77,7 @@ class BaseResource:
 class Resource(BaseResource):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.session = requests.Session()
+        self.client = httpx.Client()
         for action_name in self.actions.keys():
             self.add_action(action_name)
 
@@ -86,8 +87,6 @@ class Resource(BaseResource):
         ):
             url = self.get_action_full_url(action_name, *args)
             method = self.get_action_method(action_name)
-            if self.json_encode_body and body:
-                body = json.dumps(body)
             request = Request(
                 url=url,
                 method=method,
@@ -100,7 +99,7 @@ class Resource(BaseResource):
             )
             request.params.update(self.params)
             request.headers.update(self.headers)
-            return make_request(self.session, request)
+            return make_request(self.client, request)
 
         setattr(self, action_name, MethodType(action_method, self))
 
@@ -108,6 +107,7 @@ class Resource(BaseResource):
 class AsyncResource(BaseResource):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.client = httpx.AsyncClient()
         for action_name in self.actions.keys():
             self.add_action(action_name)
 
@@ -117,8 +117,6 @@ class AsyncResource(BaseResource):
         ):
             url = self.get_action_full_url(action_name, *args)
             method = self.get_action_method(action_name)
-            if self.json_encode_body and body:
-                body = json.dumps(body)
             request = Request(
                 url=url,
                 method=method,
@@ -131,7 +129,7 @@ class AsyncResource(BaseResource):
             )
             request.params.update(self.params)
             request.headers.update(self.headers)
-            async with aiohttp.ClientSession() as session:
-                return await make_async_request(session, request)
+            async with self.client as client:
+                return await make_async_request(client, request)
 
         setattr(self, action_name, MethodType(action_method, self))

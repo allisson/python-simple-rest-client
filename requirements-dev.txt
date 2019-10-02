@@ -1,6 +1,5 @@
 -r requirements.txt
 Sphinx
-aioresponses
 asynctest
 black
 codecov
@@ -10,6 +9,6 @@ pre-commit
 pytest
 pytest-asyncio
 pytest-cov
-responses
+pytest-httpserver
 twine
 wheel

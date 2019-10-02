@@ -1,4 +1,2 @@
-aiohttp>=2.2.0
-json-encoder>=0.4.4
 python-status>=1.0.1
-requests>=2.13.0
+httpx>=0.7.4

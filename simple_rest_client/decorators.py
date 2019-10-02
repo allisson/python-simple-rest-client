@@ -2,9 +2,7 @@ import logging
 from functools import wraps
 
 import status
-from aiohttp.client_exceptions import ServerTimeoutError
-from requests.exceptions import ConnectionError as RequestsConnectionError
-from requests.exceptions import ReadTimeout, Timeout
+from httpx import exceptions
 
 from .exceptions import AuthError, ClientConnectionError, ClientError, NotFoundError, ServerError
 
@@ -28,7 +26,12 @@ def handle_request_error(f):
     def wrapper(*args, **kwargs):
         try:
             response = f(*args, **kwargs)
-        except (Timeout, ReadTimeout, RequestsConnectionError) as exc:
+        except (
+            exceptions.ReadTimeout,
+            exceptions.ReadTimeout,
+            exceptions.WriteTimeout,
+            exceptions.PoolTimeout,
+        ) as exc:
             logger.exception(exc)
             raise ClientConnectionError() from exc
 
@@ -43,7 +46,12 @@ def handle_async_request_error(f):
     async def wrapper(*args, **kwargs):
         try:
             response = await f(*args, **kwargs)
-        except ServerTimeoutError as exc:
+        except (
+            exceptions.ReadTimeout,
+            exceptions.ReadTimeout,
+            exceptions.WriteTimeout,
+            exceptions.PoolTimeout,
+        ) as exc:
             logger.exception(exc)
             raise ClientConnectionError() from exc
 

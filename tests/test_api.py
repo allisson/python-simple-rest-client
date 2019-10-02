@@ -1,14 +1,20 @@
 import pytest
-import responses
-from aioresponses import aioresponses
 
 from simple_rest_client.api import API
 from simple_rest_client.resource import Resource
 
 
+def test_api_headers():
+    api = API(api_root_url="http://localhost:0/api/")
+    assert api.headers == {}
+
+    json_api = API(api_root_url="http://localhost:0/api/", json_encode_body=True)
+    assert json_api.headers == {"Content-Type": "application/json"}
+
+
 @pytest.mark.parametrize("ssl_verify,expected_ssl_verify", [(None, True), (True, True), (False, False)])
 def test_api_ssl_verify(ssl_verify, expected_ssl_verify, api, reqres_resource):
-    api = API(api_root_url="https://reqres.in/api/", json_encode_body=True, ssl_verify=ssl_verify)
+    api = API(api_root_url="http://localhost:0/api/", json_encode_body=True, ssl_verify=ssl_verify)
     api.add_resource(resource_name="users")
     assert api.ssl_verify == expected_ssl_verify
 
@@ -51,45 +57,45 @@ def test_api_get_resource_list(api):
 @pytest.mark.parametrize(
     "url,method,status,action,args,kwargs",
     [
-        ("https://reqres.in/api/users", "GET", 200, "list", None, {}),
-        ("https://reqres.in/api/users", "POST", 201, "create", None, {"body": {"success": True}}),
-        ("https://reqres.in/api/users/2", "GET", 200, "retrieve", 2, {"body": {"success": True}}),
-        ("https://reqres.in/api/users/2", "PUT", 200, "update", 2, {"body": {"success": True}}),
-        ("https://reqres.in/api/users/2", "PATCH", 200, "partial_update", 2, {"body": {"success": True}}),
-        ("https://reqres.in/api/users/2", "DELETE", 204, "destroy", 2, {"body": {"success": True}}),
+        ("/api/users", "GET", 200, "list", None, {}),
+        ("/api/users", "POST", 201, "create", None, {"body": {"success": True}}),
+        ("/api/users/2", "GET", 200, "retrieve", 2, {"body": {"success": True}}),
+        ("/api/users/2", "PUT", 200, "update", 2, {"body": {"success": True}}),
+        ("/api/users/2", "PATCH", 200, "partial_update", 2, {"body": {"success": True}}),
+        ("/api/users/2", "DELETE", 204, "destroy", 2, {"body": {"success": True}}),
     ],
 )
-@responses.activate
-def test_reqres_api_users_actions(url, method, status, action, args, kwargs, reqres_api):
-    responses.add(getattr(responses, method), url, json={"success": True}, status=status)
+def test_reqres_api_users_actions(httpserver, url, method, status, action, args, kwargs, reqres_api):
+    httpserver.expect_request(url, method=method).respond_with_json({"success": True}, status=status)
 
     response = getattr(reqres_api.users, action)(args, **kwargs)
     assert response.status_code == status
     assert response.method == method
-    assert response.url == url
-    assert response.body == {"success": True}
+    assert url in response.url
+    if method != "DELETE":
+        assert response.body == {"success": True}
 
 
 @pytest.mark.asyncio
 @pytest.mark.parametrize(
     "url,method,status,action,args,kwargs",
     [
-        ("https://reqres.in/api/users", "GET", 200, "list", None, {}),
-        ("https://reqres.in/api/users", "POST", 201, "create", None, {"body": {"success": True}}),
-        ("https://reqres.in/api/users/2", "GET", 200, "retrieve", 2, {"body": {"success": True}}),
-        ("https://reqres.in/api/users/2", "PUT", 200, "update", 2, {"body": {"success": True}}),
-        ("https://reqres.in/api/users/2", "PATCH", 200, "partial_update", 2, {"body": {"success": True}}),
-        ("https://reqres.in/api/users/2", "DELETE", 204, "destroy", 2, {"body": {"success": True}}),
+        ("/api/users", "GET", 200, "list", None, {}),
+        ("/api/users", "POST", 201, "create", None, {"body": {"success": True}}),
+        ("/api/users/2", "GET", 200, "retrieve", 2, {"body": {"success": True}}),
+        ("/api/users/2", "PUT", 200, "update", 2, {"body": {"success": True}}),
+        ("/api/users/2", "PATCH", 200, "partial_update", 2, {"body": {"success": True}}),
+        ("/api/users/2", "DELETE", 204, "destroy", 2, {"body": {"success": True}}),
     ],
 )
-async def test_reqres_async_api_users_actions(url, method, status, action, args, kwargs, reqres_async_api):
-    with aioresponses() as mock_response:
-        mock_response_method = getattr(mock_response, method.lower())
-        mock_response_method(
-            url, status=status, body=b'{"success": true}', headers={"Content-Type": "application/json"}
-        )
-        response = await getattr(reqres_async_api.users, action)(args, **kwargs)
+async def test_reqres_async_api_users_actions(
+    httpserver, url, method, status, action, args, kwargs, reqres_async_api
+):
+    httpserver.expect_request(url, method=method).respond_with_json({"success": True}, status=status)
+
+    response = await getattr(reqres_async_api.users, action)(args, **kwargs)
     assert response.status_code == status
     assert response.method == method
-    assert response.url == url
-    assert response.body == {"success": True}
+    assert url in response.url
+    if method != "DELETE":
+        assert response.body == {"success": True}
