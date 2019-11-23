@@ -27,10 +27,7 @@ def handle_request_error(f):
         try:
             response = f(*args, **kwargs)
         except (
-            exceptions.ReadTimeout,
-            exceptions.ReadTimeout,
-            exceptions.WriteTimeout,
-            exceptions.PoolTimeout,
+            exceptions.Timeout,
         ) as exc:
             logger.exception(exc)
             raise ClientConnectionError() from exc
