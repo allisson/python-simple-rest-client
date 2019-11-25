@@ -1,6 +1,11 @@
 Changelog
 ---------
 
+1.0.1
+~~~~~
+
+* Simplify httpx timeout handling (thanks @daneoshiga).
+
 1.0.0
 ~~~~~
 
