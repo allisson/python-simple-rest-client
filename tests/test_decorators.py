@@ -54,7 +54,7 @@ def test_validate_response_client_error(status_code, response_kwargs):
 
 @pytest.mark.parametrize(
     "side_effect",
-    (exceptions.ReadTimeout, exceptions.ReadTimeout, exceptions.WriteTimeout, exceptions.PoolTimeout),
+    (exceptions.ConnectTimeout, exceptions.ReadTimeout, exceptions.WriteTimeout, exceptions.PoolTimeout),
 )
 def test_handle_request_error_exceptions(side_effect):
     wrapped = mock.Mock(side_effect=side_effect)
