@@ -1,6 +1,11 @@
 Changelog
 ---------
 
+1.0.2
+~~~~~
+
+* Locking httpx version below 0.8.0 (thanks @patcon).
+
 1.0.1
 ~~~~~
 
