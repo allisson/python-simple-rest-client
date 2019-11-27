@@ -25,7 +25,7 @@ with codecs.open(os.path.join(here, "CHANGES.rst"), encoding="utf-8") as f:
     changelog = f.read()
 
 
-install_requirements = ["python-status>=1.0.1", "httpx>=0.7.4"]
+install_requirements = ["python-status>=1.0.1", "httpx<0.8.0"]
 tests_requirements = ["pytest", "pytest-asyncio", "pytest-cov", "pytest-httpserver", "coveralls"]
 
 
