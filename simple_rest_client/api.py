@@ -46,7 +46,7 @@ class API:
             json_encode_body=json_encode_body or self.json_encode_body,
             ssl_verify=self.ssl_verify,
         )
-        valid_name = correct_attribute_name(resource_name)
+        valid_name = self.correct_attribute_name(resource_name)
         self._resources[valid_name] = resource
         setattr(self, valid_name, resource)
 
