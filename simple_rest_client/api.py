@@ -46,8 +46,13 @@ class API:
             json_encode_body=json_encode_body or self.json_encode_body,
             ssl_verify=self.ssl_verify,
         )
-        self._resources[resource_name] = resource
-        setattr(self, resource_name, resource)
+        valid_name = correct_attribute_name(resource_name)
+        self._resources[valid_name] = resource
+        setattr(self, valid_name, resource)
 
     def get_resource_list(self):
         return list(self._resources.keys())
+    
+    def correct_attribute_name(self, name):
+        return name.replace('-', '_')
+        
