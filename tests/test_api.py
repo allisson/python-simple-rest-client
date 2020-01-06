@@ -37,6 +37,17 @@ def test_api_add_resource(api, reqres_resource):
     assert "users" in api._resources
 
 
+@pytest.mark.parametrize(
+    "resource_name,resource_valid_name",
+    [("users", "users"), ("my-users", "my_users"), ("my users", "my_users"), ("影師嗎", "ying_shi_ma")],
+)
+def test_api_resource_valid_name(resource_name, resource_valid_name, api):
+    api.add_resource(resource_name=resource_name)
+    resource = getattr(api, resource_valid_name)
+    assert isinstance(resource, Resource)
+    assert resource_valid_name in api._resources
+
+
 def test_api_add_resource_with_other_resource_class(api, reqres_resource):
     class AnotherResource(Resource):
         def extra_action(self):
