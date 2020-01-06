@@ -26,9 +26,7 @@ def handle_request_error(f):
     def wrapper(*args, **kwargs):
         try:
             response = f(*args, **kwargs)
-        except (
-            exceptions.Timeout,
-        ) as exc:
+        except (exceptions.Timeout,) as exc:
             logger.exception(exc)
             raise ClientConnectionError() from exc
 

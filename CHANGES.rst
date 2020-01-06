@@ -1,6 +1,11 @@
 Changelog
 ---------
 
+1.0.3
+~~~~~
+
+* Fix api resource names (thanks @cfytrok).
+
 1.0.2
 ~~~~~
 

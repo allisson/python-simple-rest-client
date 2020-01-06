@@ -1,3 +1,5 @@
+from slugify import slugify
+
 from .resource import Resource
 
 
@@ -35,10 +37,11 @@ class API:
         append_slash=False,
         json_encode_body=False,
     ):
+        resource_valid_name = self.correct_attribute_name(resource_name)
         resource_class = resource_class or Resource
         resource = resource_class(
             api_root_url=api_root_url or self.api_root_url,
-            resource_name=resource_name,
+            resource_name=resource_valid_name,
             params=params or self.params,
             headers=headers or self.headers,
             timeout=timeout or self.timeout,
@@ -46,13 +49,12 @@ class API:
             json_encode_body=json_encode_body or self.json_encode_body,
             ssl_verify=self.ssl_verify,
         )
-        valid_name = self.correct_attribute_name(resource_name)
-        self._resources[valid_name] = resource
-        setattr(self, valid_name, resource)
+        self._resources[resource_valid_name] = resource
+        setattr(self, resource_valid_name, resource)
 
     def get_resource_list(self):
         return list(self._resources.keys())
-    
+
     def correct_attribute_name(self, name):
-        return name.replace('-', '_')
-        
+        slug_name = slugify(name)
+        return slug_name.replace("-", "_")
