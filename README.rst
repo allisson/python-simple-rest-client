@@ -2,7 +2,7 @@ Simple Rest Client
 ==================
 
 |TravisCI Build Status| |Coverage Status| |Requirements Status|
-|Scrutinizer Code Quality| |Code Climate|
+|Code Climate|
 
 ----
 
@@ -40,7 +40,5 @@ Projects using
    :target: https://codecov.io/gh/allisson/python-simple-rest-client
 .. |Requirements Status| image:: https://requires.io/github/allisson/python-simple-rest-client/requirements.svg?branch=master
    :target: https://requires.io/github/allisson/python-simple-rest-client/requirements/?branch=master
-.. |Scrutinizer Code Quality| image:: https://scrutinizer-ci.com/g/allisson/python-simple-rest-client/badges/quality-score.png?b=master
-   :target: https://scrutinizer-ci.com/g/allisson/python-simple-rest-client/?branch=master
 .. |Code Climate| image:: https://codeclimate.com/github/allisson/python-simple-rest-client/badges/gpa.svg
    :target: https://codeclimate.com/github/allisson/python-simple-rest-client
