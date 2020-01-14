@@ -22,7 +22,7 @@ Documentation
 
 Check out documentation at `Read the Docs`_ website.
 
-.. _`Read the Docs`: https://python-simple-rest-client.readthedocs.org/
+.. _`Read the Docs`: https://python-simple-rest-client.readthedocs.io/en/latest/
 
 
 Projects using
