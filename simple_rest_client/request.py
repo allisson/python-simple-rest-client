@@ -15,7 +15,6 @@ def make_request(client, request):
         "params": request.params,
         "headers": request.headers,
         "timeout": request.timeout,
-        "verify": request.ssl_verify,
         **request.kwargs,
     }
     if method.lower() in ("post", "put", "patch"):
@@ -55,7 +54,6 @@ async def make_async_request(client, request):
         "params": request.params,
         "headers": request.headers,
         "timeout": request.timeout,
-        "verify": request.ssl_verify,
         **request.kwargs,
     }
     if method.lower() in ("post", "put", "patch"):

@@ -1,6 +1,12 @@
 Changelog
 ---------
 
+1.0.4
+~~~~~
+
+* Update httpx version (sync version is back yey!).
+* Use exceptions.TimeoutException for ClientConnectionError.
+
 1.0.3
 ~~~~~
 

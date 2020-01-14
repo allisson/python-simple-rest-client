@@ -26,7 +26,7 @@ def handle_request_error(f):
     def wrapper(*args, **kwargs):
         try:
             response = f(*args, **kwargs)
-        except (exceptions.Timeout,) as exc:
+        except (exceptions.TimeoutException,) as exc:
             logger.exception(exc)
             raise ClientConnectionError() from exc
 
@@ -41,12 +41,7 @@ def handle_async_request_error(f):
     async def wrapper(*args, **kwargs):
         try:
             response = await f(*args, **kwargs)
-        except (
-            exceptions.ReadTimeout,
-            exceptions.ReadTimeout,
-            exceptions.WriteTimeout,
-            exceptions.PoolTimeout,
-        ) as exc:
+        except (exceptions.TimeoutException,) as exc:
             logger.exception(exc)
             raise ClientConnectionError() from exc
 

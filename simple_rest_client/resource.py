@@ -77,7 +77,7 @@ class BaseResource:
 class Resource(BaseResource):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.client = httpx.Client()
+        self.client = httpx.Client(verify=self.ssl_verify)
         for action_name in self.actions.keys():
             self.add_action(action_name)
 
@@ -94,7 +94,6 @@ class Resource(BaseResource):
                 body=body,
                 headers=headers or {},
                 timeout=self.timeout,
-                ssl_verify=self.ssl_verify,
                 kwargs=kwargs,
             )
             request.params.update(self.params)
@@ -107,7 +106,7 @@ class Resource(BaseResource):
 class AsyncResource(BaseResource):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.client = httpx.AsyncClient()
+        self.client = httpx.AsyncClient(verify=self.ssl_verify)
         for action_name in self.actions.keys():
             self.add_action(action_name)
 
@@ -124,7 +123,6 @@ class AsyncResource(BaseResource):
                 body=body,
                 headers=headers or {},
                 timeout=self.timeout,
-                ssl_verify=self.ssl_verify,
                 kwargs=kwargs,
             )
             request.params.update(self.params)
