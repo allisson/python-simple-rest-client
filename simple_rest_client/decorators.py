@@ -1,8 +1,8 @@
 import logging
 from functools import wraps
 
+import httpx
 import status
-from httpx import exceptions
 
 from .exceptions import AuthError, ClientConnectionError, ClientError, NotFoundError, ServerError
 
@@ -26,7 +26,7 @@ def handle_request_error(f):
     def wrapper(*args, **kwargs):
         try:
             response = f(*args, **kwargs)
-        except (exceptions.TimeoutException,) as exc:
+        except (httpx.TimeoutException,) as exc:
             logger.exception(exc)
             raise ClientConnectionError() from exc
 
@@ -41,7 +41,7 @@ def handle_async_request_error(f):
     async def wrapper(*args, **kwargs):
         try:
             response = await f(*args, **kwargs)
-        except (exceptions.TimeoutException,) as exc:
+        except (httpx.TimeoutException,) as exc:
             logger.exception(exc)
             raise ClientConnectionError() from exc
 
