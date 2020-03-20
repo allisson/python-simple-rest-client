@@ -1,6 +1,11 @@
 Changelog
 ---------
 
+1.0.5
+~~~~~
+
+* Fix imports on httpx 0.12.x (thanks @stekman37).
+
 1.0.4
 ~~~~~
 
