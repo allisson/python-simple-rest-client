@@ -34,7 +34,7 @@ Projects using
 .. _`python-vindi`: https://github.com/allisson/python-vindi
 .. _`sentry-patrol`: https://github.com/daneoshiga/sentry-patrol
 
-.. |Github Action Status| image:: https://github.com/allisson/python-simple-rest-client/workflows/main-workflow/badge.svg
+.. |Github Actions Status| image:: https://github.com/allisson/python-simple-rest-client/workflows/main-workflow/badge.svg
    :target: https://github.com/allisson/python-simple-rest-client/actions
 .. |Coverage Status| image:: https://codecov.io/gh/allisson/python-simple-rest-client/branch/master/graph/badge.svg
    :target: https://codecov.io/gh/allisson/python-simple-rest-client
