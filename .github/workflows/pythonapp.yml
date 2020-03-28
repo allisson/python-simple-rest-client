@@ -1,4 +1,4 @@
-name: Test python-simple-rest-client
+name: main-workflow
 
 on: [push]
 
