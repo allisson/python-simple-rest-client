@@ -1,7 +1,7 @@
 Simple Rest Client
 ==================
 
-|TravisCI Build Status| |Coverage Status| |Requirements Status|
+|Github Actions Status| |Coverage Status| |Requirements Status|
 |Code Climate|
 
 ----
@@ -34,8 +34,8 @@ Projects using
 .. _`python-vindi`: https://github.com/allisson/python-vindi
 .. _`sentry-patrol`: https://github.com/daneoshiga/sentry-patrol
 
-.. |TravisCI Build Status| image:: https://travis-ci.org/allisson/python-simple-rest-client.svg?branch=master
-   :target: https://travis-ci.org/allisson/python-simple-rest-client
+.. |Github Action Status| image:: https://github.com/allisson/python-simple-rest-client/workflows/main-workflow/badge.svg
+   :target: https://github.com/allisson/python-simple-rest-client/actions
 .. |Coverage Status| image:: https://codecov.io/gh/allisson/python-simple-rest-client/branch/master/graph/badge.svg
    :target: https://codecov.io/gh/allisson/python-simple-rest-client
 .. |Requirements Status| image:: https://requires.io/github/allisson/python-simple-rest-client/requirements.svg?branch=master
