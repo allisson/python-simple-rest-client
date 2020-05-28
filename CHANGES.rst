@@ -1,6 +1,11 @@
 Changelog
 ---------
 
+1.0.6
+~~~~~
+
+* Fix httpx exception imports on httpx 0.13.x (thanks @denravonska).
+
 1.0.5
 ~~~~~
 

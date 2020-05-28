@@ -26,7 +26,7 @@ def handle_request_error(f):
     def wrapper(*args, **kwargs):
         try:
             response = f(*args, **kwargs)
-        except (httpx.TimeoutException,) as exc:
+        except (httpx.ConnectTimeout, httpx.ReadTimeout, httpx.WriteTimeout, httpx.PoolTimeout) as exc:
             logger.exception(exc)
             raise ClientConnectionError() from exc
 
@@ -41,7 +41,7 @@ def handle_async_request_error(f):
     async def wrapper(*args, **kwargs):
         try:
             response = await f(*args, **kwargs)
-        except (httpx.TimeoutException,) as exc:
+        except (httpx.ConnectTimeout, httpx.ReadTimeout, httpx.WriteTimeout, httpx.PoolTimeout) as exc:
             logger.exception(exc)
             raise ClientConnectionError() from exc
 
