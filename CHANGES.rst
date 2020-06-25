@@ -1,6 +1,11 @@
 Changelog
 ---------
 
+1.0.7
+~~~~~
+
+* Update ClientConnectionError to deal with httpx.NetworkError exceptions (thanks @depauwjimmy).
+
 1.0.6
 ~~~~~
 
