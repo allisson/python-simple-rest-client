@@ -50,7 +50,7 @@ def handle_async_request_error(f):
             response = await f(*args, **kwargs)
         except client_connection_exceptions as exc:
             logger.exception(exc)
-            raise ClientConnectionError() from exc
+            raise ClientConnectionError(exc)
 
         validate_response(response)
 
