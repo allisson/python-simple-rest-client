@@ -7,6 +7,13 @@ import status
 from .exceptions import AuthError, ClientConnectionError, ClientError, NotFoundError, ServerError
 
 logger = logging.getLogger(__name__)
+client_connection_exceptions = (
+    httpx.ConnectTimeout,
+    httpx.ReadTimeout,
+    httpx.WriteTimeout,
+    httpx.PoolTimeout,
+    httpx.NetworkError,
+)
 
 
 def validate_response(response):
@@ -26,9 +33,9 @@ def handle_request_error(f):
     def wrapper(*args, **kwargs):
         try:
             response = f(*args, **kwargs)
-        except (httpx.ConnectTimeout, httpx.ReadTimeout, httpx.WriteTimeout, httpx.PoolTimeout) as exc:
+        except client_connection_exceptions as exc:
             logger.exception(exc)
-            raise ClientConnectionError() from exc
+            raise ClientConnectionError(exc)
 
         validate_response(response)
 
@@ -41,7 +48,7 @@ def handle_async_request_error(f):
     async def wrapper(*args, **kwargs):
         try:
             response = await f(*args, **kwargs)
-        except (httpx.ConnectTimeout, httpx.ReadTimeout, httpx.WriteTimeout, httpx.PoolTimeout) as exc:
+        except client_connection_exceptions as exc:
             logger.exception(exc)
             raise ClientConnectionError() from exc
 

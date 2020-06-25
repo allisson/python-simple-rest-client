@@ -53,7 +53,8 @@ def test_validate_response_client_error(status_code, response_kwargs):
 
 
 @pytest.mark.parametrize(
-    "side_effect", (httpx.ConnectTimeout, httpx.ReadTimeout, httpx.WriteTimeout, httpx.PoolTimeout),
+    "side_effect",
+    (httpx.ConnectTimeout, httpx.ReadTimeout, httpx.WriteTimeout, httpx.PoolTimeout, httpx.NetworkError),
 )
 def test_handle_request_error_exceptions(side_effect):
     wrapped = mock.Mock(side_effect=side_effect)
@@ -61,7 +62,11 @@ def test_handle_request_error_exceptions(side_effect):
         handle_request_error(wrapped)()
 
 
-def test_handle_async_request_error_exceptions(event_loop):
-    wrapped = CoroutineMock(side_effect=httpx.ReadTimeout)
+@pytest.mark.parametrize(
+    "side_effect",
+    (httpx.ConnectTimeout, httpx.ReadTimeout, httpx.WriteTimeout, httpx.PoolTimeout, httpx.NetworkError),
+)
+def test_handle_async_request_error_exceptions(event_loop, side_effect):
+    wrapped = CoroutineMock(side_effect=side_effect)
     with pytest.raises(ClientConnectionError):
         event_loop.run_until_complete(handle_async_request_error(wrapped)())
