@@ -7,13 +7,7 @@ import status
 from .exceptions import AuthError, ClientConnectionError, ClientError, NotFoundError, ServerError
 
 logger = logging.getLogger(__name__)
-client_connection_exceptions = (
-    httpx.ConnectTimeout,
-    httpx.ReadTimeout,
-    httpx.WriteTimeout,
-    httpx.PoolTimeout,
-    httpx.NetworkError,
-)
+client_connection_exceptions = (httpx.RequestError,)
 
 
 def validate_response(response):

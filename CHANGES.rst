@@ -1,6 +1,11 @@
 Changelog
 ---------
 
+1.0.8
+~~~~~
+
+* Use httpx.RequestError as base exception for ClientConnectionError.
+
 1.0.7
 ~~~~~
 
