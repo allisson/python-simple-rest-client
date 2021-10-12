@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ['3.7', '3.8', '3.9', '3.10']
+        python-version: ["3.7", "3.8", "3.9", "3.10"]
 
     steps:
       - uses: actions/checkout@v2
@@ -23,5 +23,3 @@ jobs:
         run: make lint
       - name: pytest
         run: pytest --cov-report=xml
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v1
