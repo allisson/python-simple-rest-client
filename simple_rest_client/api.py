@@ -34,20 +34,21 @@ class API:
         params=None,
         headers=None,
         timeout=None,
-        append_slash=False,
-        json_encode_body=False,
+        append_slash=None,
+        json_encode_body=None,
+        ssl_verify=None,
     ):
         resource_valid_name = self.correct_attribute_name(resource_name)
         resource_class = resource_class or Resource
         resource = resource_class(
-            api_root_url=api_root_url or self.api_root_url,
+            api_root_url=api_root_url if api_root_url is not None else self.api_root_url,
             resource_name=resource_valid_name,
-            params=params or self.params,
-            headers=headers or self.headers,
-            timeout=timeout or self.timeout,
-            append_slash=append_slash or self.append_slash,
-            json_encode_body=json_encode_body or self.json_encode_body,
-            ssl_verify=self.ssl_verify,
+            params=params if params is not None else self.params,
+            headers=headers if headers is not None else self.headers,
+            timeout=timeout if timeout is not None else self.timeout,
+            append_slash=append_slash if append_slash is not None else self.append_slash,
+            json_encode_body=json_encode_body if json_encode_body is not None else self.json_encode_body,
+            ssl_verify=ssl_verify if ssl_verify is not None else self.ssl_verify,
         )
         self._resources[resource_valid_name] = resource
         setattr(self, resource_valid_name, resource)
