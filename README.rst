@@ -6,7 +6,7 @@ Simple Rest Client
 
 ----
 
-Simple REST client for python 3.6+.
+Simple REST client for python 3.7+.
 
 
 How to install

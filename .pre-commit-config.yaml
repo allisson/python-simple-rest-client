@@ -1,21 +1,27 @@
 repos:
-- repo: local
-  hooks:
-  - id: black
-    name: black
-    entry: black
-    language: system
-    types: [python]
-    args: ['--diff']
-  - id: isort
-    name: isort
-    entry: isort
-    language: system
-    types: [python]
-    args: ['--check-only']
-  - id: flake8
-    name: flake8
-    entry: flake8
-    language: system
-    types: [python]
-    args: ['--ignore=E501,W503']
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.0.1
+    hooks:
+      - id: check-yaml
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+  - repo: https://gitlab.com/pycqa/flake8
+    rev: 4.0.1
+    hooks:
+      - id: flake8
+        args: ["--ignore=E501"]
+  - repo: https://github.com/pycqa/isort
+    rev: 5.9.3
+    hooks:
+      - id: isort
+        name: isort (python)
+      - id: isort
+        name: isort (cython)
+        types: [cython]
+      - id: isort
+        name: isort (pyi)
+        types: [pyi]
+  - repo: https://github.com/psf/black
+    rev: 21.9b0
+    hooks:
+      - id: black

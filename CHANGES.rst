@@ -1,6 +1,15 @@
 Changelog
 ---------
 
+1.1.0
+~~~~~
+
+* Drop support for python 3.6.x.
+* Fix json_encode_body cannot be overridden bug (thanks @denravonska).
+* Replace asynctest with asyncmock.
+* Update httpx and python-slugify to latest versions.
+* Update pre-commit rules.
+
 1.0.8
 ~~~~~
 

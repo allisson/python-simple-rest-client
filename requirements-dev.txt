@@ -1,6 +1,6 @@
 -r requirements.txt
 Sphinx
-asynctest
+asyncmock
 black
 codecov
 flake8
