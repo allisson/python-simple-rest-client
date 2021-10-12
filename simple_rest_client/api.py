@@ -23,9 +23,6 @@ class API:
         self.ssl_verify = True if ssl_verify is None else ssl_verify
         self._resources = {}
 
-        if self.json_encode_body:
-            self.headers["Content-Type"] = "application/json"
-
     def add_resource(
         self,
         api_root_url=None,

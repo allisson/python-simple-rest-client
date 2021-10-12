@@ -8,7 +8,7 @@ def test_api_headers():
     api = API(api_root_url="http://localhost:0/api/")
     assert api.headers == {}
 
-    json_api = API(api_root_url="http://localhost:0/api/", json_encode_body=True)
+    json_api = API(api_root_url="http://localhost:0/api/", headers={"Content-Type": "application/json"})
     assert json_api.headers == {"Content-Type": "application/json"}
 
 

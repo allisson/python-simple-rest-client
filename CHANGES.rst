@@ -1,6 +1,11 @@
 Changelog
 ---------
 
+1.1.1
+~~~~~
+
+* Fix content-type is always json if json_encode_body is true (thanks @aenima-x).
+
 1.1.0
 ~~~~~
 
