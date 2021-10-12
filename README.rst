@@ -1,8 +1,7 @@
 Simple Rest Client
 ==================
 
-|Github Actions Status| |Coverage Status| |Requirements Status|
-|Code Climate|
+|Github Actions Status|
 
 ----
 
@@ -36,9 +35,3 @@ Projects using
 
 .. |Github Actions Status| image:: https://github.com/allisson/python-simple-rest-client/workflows/main-workflow/badge.svg
    :target: https://github.com/allisson/python-simple-rest-client/actions
-.. |Coverage Status| image:: https://codecov.io/gh/allisson/python-simple-rest-client/branch/master/graph/badge.svg
-   :target: https://codecov.io/gh/allisson/python-simple-rest-client
-.. |Requirements Status| image:: https://requires.io/github/allisson/python-simple-rest-client/requirements.svg?branch=master
-   :target: https://requires.io/github/allisson/python-simple-rest-client/requirements/?branch=master
-.. |Code Climate| image:: https://codeclimate.com/github/allisson/python-simple-rest-client/badges/gpa.svg
-   :target: https://codeclimate.com/github/allisson/python-simple-rest-client
