@@ -73,6 +73,10 @@ class BaseResource:
         action = self.get_action(action_name)
         return action["method"]
 
+    def get_action_doc(self, action_name):
+        action = self.get_action(action_name)
+        return action.get("doc")
+
 
 class Resource(BaseResource):
     def __init__(self, *args, **kwargs):
@@ -100,6 +104,7 @@ class Resource(BaseResource):
             request.headers.update(self.headers)
             return make_request(self.client, request)
 
+        action_method.__doc__ = self.get_action_doc(action_name)
         setattr(self, action_name, MethodType(action_method, self))
 
 
