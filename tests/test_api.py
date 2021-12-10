@@ -45,7 +45,8 @@ def test_api_resource_valid_name(resource_name, resource_valid_name, api):
     api.add_resource(resource_name=resource_name)
     resource = getattr(api, resource_valid_name)
     assert isinstance(resource, Resource)
-    assert resource_valid_name in api._resources
+    assert resource_name in api._resources
+    assert resource.get_action_full_url('list') == f'{api.api_root_url}{resource_name}'
 
 
 def test_api_add_resource_with_other_resource_class(api, reqres_resource):
