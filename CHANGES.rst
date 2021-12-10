@@ -1,6 +1,11 @@
 Changelog
 ---------
 
+1.1.2
+~~~~~
+
+* Fix preserve resource_name as given (thanks @leorochael).
+
 1.1.1
 ~~~~~
 
