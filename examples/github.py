@@ -18,8 +18,8 @@ class EventResource(Resource):
 
 
 # https://github.com/settings/tokens
-default_params = {"access_token": "valid-token"}
-github_api = API(api_root_url="https://api.github.com", params=default_params, json_encode_body=True)
+headers = {"Authorization": "token valid-token"}
+github_api = API(api_root_url="https://api.github.com", headers=headers, json_encode_body=True)
 github_api.add_resource(resource_name="events", resource_class=EventResource)
 print("github_api.events.public_events={!r}".format(github_api.events.public_events()))
 print(
