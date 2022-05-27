@@ -4,7 +4,13 @@ from functools import wraps
 import httpx
 import status
 
-from .exceptions import AuthError, ClientConnectionError, ClientError, NotFoundError, ServerError
+from .exceptions import (
+    AuthError,
+    ClientConnectionError,
+    ClientError,
+    NotFoundError,
+    ServerError,
+)
 
 logger = logging.getLogger(__name__)
 client_connection_exceptions = (httpx.RequestError,)

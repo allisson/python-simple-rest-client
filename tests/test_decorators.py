@@ -3,9 +3,13 @@ from unittest import mock
 import httpx
 import pytest
 import status
-from asynctest.mock import CoroutineMock
+from asyncmock import AsyncMock
 
-from simple_rest_client.decorators import handle_async_request_error, handle_request_error, validate_response
+from simple_rest_client.decorators import (
+    handle_async_request_error,
+    handle_request_error,
+    validate_response,
+)
 from simple_rest_client.exceptions import (
     AuthError,
     ClientConnectionError,
@@ -83,6 +87,6 @@ def test_handle_request_error_exceptions(side_effect):
     ),
 )
 def test_handle_async_request_error_exceptions(event_loop, side_effect):
-    wrapped = CoroutineMock(side_effect=side_effect(message="message", request="Request"))
+    wrapped = AsyncMock(side_effect=side_effect(message="message", request="Request"))
     with pytest.raises(ClientConnectionError):
         event_loop.run_until_complete(handle_async_request_error(wrapped)())

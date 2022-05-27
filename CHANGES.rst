@@ -1,6 +1,25 @@
 Changelog
 ---------
 
+1.1.2
+~~~~~
+
+* Fix preserve resource_name as given (thanks @leorochael).
+
+1.1.1
+~~~~~
+
+* Fix content-type is always json if json_encode_body is true (thanks @aenima-x).
+
+1.1.0
+~~~~~
+
+* Drop support for python 3.6.x.
+* Fix json_encode_body cannot be overridden bug (thanks @denravonska).
+* Replace asynctest with asyncmock.
+* Update httpx and python-slugify to latest versions.
+* Update pre-commit rules.
+
 1.0.8
 ~~~~~
 

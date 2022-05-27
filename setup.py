@@ -25,7 +25,7 @@ with codecs.open(os.path.join(here, "CHANGES.rst"), encoding="utf-8") as f:
     changelog = f.read()
 
 
-install_requirements = ["python-status>=1.0.1", "httpx>=0.16.1", "python-slugify>=4.0.0"]
+install_requirements = ["python-status>=1.0.1", "httpx>=0.19.0", "python-slugify>=5.0.2"]
 tests_requirements = ["pytest", "pytest-asyncio", "pytest-cov", "pytest-httpserver", "coveralls"]
 
 
@@ -54,12 +54,13 @@ setup(
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Intended Audience :: Developers",
-        "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
         "Topic :: Software Development :: Libraries",
     ],
-    keywords="rest client http asyncio",
+    keywords="rest client http httpx asyncio",
     packages=find_packages(exclude=["docs", "tests*"]),
     setup_requires=["pytest-runner"],
     install_requires=install_requirements,
