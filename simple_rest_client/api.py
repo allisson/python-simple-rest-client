@@ -1,6 +1,6 @@
 from slugify import slugify
 
-from .resource import Resource
+from simple_rest_client.resource import Resource
 
 
 class API:

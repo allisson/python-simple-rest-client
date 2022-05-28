@@ -4,7 +4,7 @@ from functools import wraps
 import httpx
 import status
 
-from .exceptions import (
+from simple_rest_client.exceptions import (
     AuthError,
     ClientConnectionError,
     ClientError,

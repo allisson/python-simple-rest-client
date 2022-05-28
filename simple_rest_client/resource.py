@@ -3,9 +3,9 @@ from types import MethodType
 
 import httpx
 
-from .exceptions import ActionNotFound, ActionURLMatchError
-from .models import Request
-from .request import make_async_request, make_request
+from simple_rest_client.exceptions import ActionNotFound, ActionURLMatchError
+from simple_rest_client.models import Request
+from simple_rest_client.request import make_async_request, make_request
 
 logger = logging.getLogger(__name__)
 

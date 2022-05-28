@@ -1,6 +1,10 @@
 [tool.black]
 line-length = 110
-target-version = ['py39']
+target-version = ['py310']
 
 [tool.isort]
 profile = 'black'
+line_length = 110
+force_alphabetical_sort_within_sections = true
+sections = ["FUTURE", "STDLIB", "THIRDPARTY", "FIRSTPARTY", "LOCALFOLDER"]
+default_section = "THIRDPARTY"

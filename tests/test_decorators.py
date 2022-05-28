@@ -5,11 +5,7 @@ import pytest
 import status
 from asyncmock import AsyncMock
 
-from simple_rest_client.decorators import (
-    handle_async_request_error,
-    handle_request_error,
-    validate_response,
-)
+from simple_rest_client.decorators import handle_async_request_error, handle_request_error, validate_response
 from simple_rest_client.exceptions import (
     AuthError,
     ClientConnectionError,

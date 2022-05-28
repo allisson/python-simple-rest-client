@@ -1,27 +1,41 @@
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.0.1
+    rev: v4.1.0
     hooks:
+      - id: check-ast
+      - id: fix-byte-order-marker
+      - id: check-docstring-first
+      - id: check-json
+      - id: check-merge-conflict
+      - id: check-symlinks
+      - id: check-toml
+      - id: check-vcs-permalinks
+      - id: check-xml
       - id: check-yaml
+      - id: debug-statements
+      - id: destroyed-symlinks
       - id: end-of-file-fixer
       - id: trailing-whitespace
-  - repo: https://gitlab.com/pycqa/flake8
+
+  - repo: https://github.com/MarcoGorelli/absolufy-imports
+    rev: v0.3.1
+    hooks:
+      - id: absolufy-imports
+
+  - repo: https://github.com/pycqa/isort
+    rev: 5.10.1
+    hooks:
+      - id: isort
+        args: ["--overwrite-in-place"]
+
+  - repo: https://github.com/psf/black
+    rev: 22.3.0
+    hooks:
+      - id: black
+        args: ["--line-length=110"]
+
+  - repo: https://github.com/pycqa/flake8
     rev: 4.0.1
     hooks:
       - id: flake8
-        args: ["--ignore=E501"]
-  - repo: https://github.com/pycqa/isort
-    rev: 5.9.3
-    hooks:
-      - id: isort
-        name: isort (python)
-      - id: isort
-        name: isort (cython)
-        types: [cython]
-      - id: isort
-        name: isort (pyi)
-        types: [pyi]
-  - repo: https://github.com/psf/black
-    rev: 21.9b0
-    hooks:
-      - id: black
+        args: ["--max-line-length=110", "--ignore=E203,E501,W503"]
