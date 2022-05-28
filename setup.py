@@ -25,7 +25,7 @@ with codecs.open(os.path.join(here, "CHANGES.rst"), encoding="utf-8") as f:
     changelog = f.read()
 
 
-install_requirements = ["python-status>=1.0.1", "httpx>=0.19.0", "python-slugify>=5.0.2"]
+install_requirements = ["python-status>=1.0.1", "httpx>=0.23.0", "python-slugify>=6.1.2"]
 tests_requirements = ["pytest", "pytest-asyncio", "pytest-cov", "pytest-httpserver", "coveralls"]
 
 
@@ -46,7 +46,7 @@ class VersionCommand(Command):
 setup(
     name="simple-rest-client",
     version=version,
-    description="Simple REST client for python 3.6+",
+    description="Simple REST client for python 3.7+",
     long_description=long_description,
     url="https://github.com/allisson/python-simple-rest-client",
     author="Allisson Azevedo",

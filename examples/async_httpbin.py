@@ -19,5 +19,4 @@ async def main():
     print("httpbin_api.basic_auth.retrieve={!r}".format(response.body))
 
 
-loop = asyncio.get_event_loop()
-loop.run_until_complete(main())
+asyncio.run(main())

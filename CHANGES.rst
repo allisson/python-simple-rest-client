@@ -1,6 +1,13 @@
 Changelog
 ---------
 
+1.1.3
+~~~~~
+
+* Update pre-commit config and code format.
+* Remove broken examples.
+* Update base requirements version.
+
 1.1.2
 ~~~~~
 
