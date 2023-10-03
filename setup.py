@@ -46,7 +46,7 @@ class VersionCommand(Command):
 setup(
     name="simple-rest-client",
     version=version,
-    description="Simple REST client for python 3.7+",
+    description="Simple REST client for python 3.8+",
     long_description=long_description,
     url="https://github.com/allisson/python-simple-rest-client",
     author="Allisson Azevedo",
@@ -54,10 +54,11 @@ setup(
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Intended Audience :: Developers",
-        "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
         "Topic :: Software Development :: Libraries",
     ],
     keywords="rest client http httpx asyncio",
