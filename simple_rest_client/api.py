@@ -56,3 +56,11 @@ class API:
     def correct_attribute_name(self, name):
         slug_name = slugify(name)
         return slug_name.replace("-", "_")
+
+    def close_client(self):
+        for resource in self._resources.values():
+            resource.close_client()
+
+    async def aclose_client(self):
+        for resource in self._resources.values():
+            await resource.close_client()

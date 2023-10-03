@@ -55,6 +55,8 @@ Let's start building a client for users resource in https://reqres.in/ service::
     >>> response = api.users.destroy(2, body=None, params={}, headers={})
     >>> response.status_code
     204
+    >>> # close client connections
+    >>> api.close_client()
 
 Building async client for users resource in https://reqres.in/ service::
 
@@ -75,6 +77,8 @@ Building async client for users resource in https://reqres.in/ service::
     >>> api.add_resource(resource_name='users', resource_class=AsyncResource)
     >>> async def main():
     ...     print(await api.users.list())
+    ...     # close client connections
+    ...     await api.aclose_client()
     ...
     >>> loop = asyncio.get_event_loop()
     >>> loop.run_until_complete(main())
@@ -125,6 +129,8 @@ Now, building a client for github events resource (https://developer.github.com/
     'https://api.github.com/repos/allisson/python-simple-rest-client/events?access_token=valid-token'
     >>> response.method
     'GET'
+    >>> # close client connections
+    >>> api.close_client()
 
 Create API without certificate validation
 

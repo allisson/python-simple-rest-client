@@ -135,6 +135,10 @@ def test_resource_response_body(
     response = reqres_resource.list()
     assert response.body == expected_response_body
 
+    # call again to validate the fix for "Stricter enforcement around client scoping"
+    response = reqres_resource.list()
+    assert response.body == expected_response_body
+
 
 @pytest.mark.asyncio
 @pytest.mark.parametrize(
@@ -179,5 +183,9 @@ async def test_asyncresource_response_body(
         response_body, status=200, content_type=content_type
     )
 
+    response = await reqres_async_resource.list()
+    assert response.body == expected_response_body
+
+    # call again to validate the fix for "Stricter enforcement around client scoping"
     response = await reqres_async_resource.list()
     assert response.body == expected_response_body

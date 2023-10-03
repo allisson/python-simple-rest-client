@@ -27,3 +27,4 @@ print(
         github_api.events.repository_events("allisson", "python-simple-rest-client")
     )
 )
+github_api.close_client()
