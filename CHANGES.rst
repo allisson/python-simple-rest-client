@@ -1,6 +1,14 @@
 Changelog
 ---------
 
+1.2.0
+~~~~~
+
+* Makefile refactor (thanks @pantuza).
+* Drop support for python 3.7.x.
+* Add a fix for stricter enforcement around client scoping.
+* Update base requirements version.
+
 1.1.3
 ~~~~~
 
