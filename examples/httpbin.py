@@ -15,3 +15,4 @@ print(
         httpbin_api.basic_auth.retrieve("username", "password", auth=auth).body
     )
 )
+httpbin_api.close_client()

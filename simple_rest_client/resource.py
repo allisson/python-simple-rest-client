@@ -81,6 +81,9 @@ class Resource(BaseResource):
         for action_name in self.actions.keys():
             self.add_action(action_name)
 
+    def close_client(self):
+        self.client.close()
+
     def add_action(self, action_name):
         def action_method(
             self, *args, body=None, params=None, headers=None, action_name=action_name, **kwargs
@@ -110,6 +113,9 @@ class AsyncResource(BaseResource):
         for action_name in self.actions.keys():
             self.add_action(action_name)
 
+    async def close_client(self):
+        await self.client.aclose()
+
     def add_action(self, action_name):
         async def action_method(
             self, *args, body=None, params=None, headers=None, action_name=action_name, **kwargs
@@ -127,7 +133,6 @@ class AsyncResource(BaseResource):
             )
             request.params.update(self.params)
             request.headers.update(self.headers)
-            async with self.client as client:
-                return await make_async_request(client, request)
+            return await make_async_request(self.client, request)
 
         setattr(self, action_name, MethodType(action_method, self))

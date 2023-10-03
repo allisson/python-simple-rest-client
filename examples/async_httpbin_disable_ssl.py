@@ -17,6 +17,7 @@ httpbin_api.add_resource(resource_name="basic_auth", resource_class=BasicAuthRes
 async def main():
     response = await httpbin_api.basic_auth.retrieve("username", "password", auth=auth)
     print("httpbin_api.basic_auth.retrieve={!r}".format(response.body))
+    await httpbin_api.aclose_client()
 
 
 asyncio.run(main())

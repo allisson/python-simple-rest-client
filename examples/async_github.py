@@ -32,6 +32,7 @@ async def main():
             await github_api.events.repository_events("allisson", "python-simple-rest-client")
         )
     )
+    await github_api.aclose_client()
 
 
 asyncio.run(main())
