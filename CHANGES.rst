@@ -1,6 +1,11 @@
 Changelog
 ---------
 
+1.2.1
+~~~~~
+
+* Add readthedocs config.
+
 1.2.0
 ~~~~~
 
